@@ -23,6 +23,7 @@ void SSD_voidInitialDataPort(void)
     DIO_voidSetPinDirection(Segment_F_Group, Segment_F_Pin, DIO_OUTPUT);
     DIO_voidSetPinDirection(Segment_G_Group, Segment_G_Pin, DIO_OUTPUT);
 #endif
+DIO_voidSetPinDirection(SegmentPower_Group, SegmentPower_Pin, DIO_OUTPUT);
 }
 
 void SSD_voidSendNumber(u8 Number)
@@ -41,4 +42,25 @@ void SSD_voidSendNumber(u8 Number)
         DIO_voidSetPinValue(Segment_G_Group, Segment_G_Pin, (NumberArr[Number] >> 6) & 0x01);
 #endif
     }
+}
+void SSD_voidEnable()
+{
+#if Seg_UsedType == Segment_Type_CommAnode
+    
+    DIO_voidSetPinValue(SegmentPower_Group, SegmentPower_Pin, DIO_HIGH);
+#elif Seg_UsedType == Segment_Type_CommCath
+
+    DIO_voidSetPinValue(SegmentPower_Group, SegmentPower_Pin, DIO_LOW);
+#endif
+}
+
+void SSD_voidDisable()
+{
+#if Seg_UsedType == Segment_Type_CommAnode
+
+    DIO_voidSetPinValue(SegmentPower_Group, SegmentPower_Pin, DIO_LOW);
+#elif Seg_UsedType == Segment_Type_CommCath
+
+    DIO_voidSetPinValue(SegmentPower_Group, SegmentPower_Pin, DIO_HIGH);
+#endif
 }

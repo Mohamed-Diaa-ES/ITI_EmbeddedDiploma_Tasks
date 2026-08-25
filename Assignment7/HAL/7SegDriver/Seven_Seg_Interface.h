@@ -28,12 +28,13 @@
 #define Segment_F_Group  DIO_PORTA
 #define Segment_G_Group  DIO_PORTA
 
-#define SegmentPower_Pin DIO_u8_PIN7
+#define SegmentPower_Pin DIO_PIN7
+#define SegmentPower_Group DIO_PORTA
 
-void SSD_voidInitialDataPort();
 void SSD_voidInitialDataPort();
 void SSD_voidSendNumber(   u8 Number );
 void SSD_voidSenditem(   u8 Number );
-
+void SSD_voidEnable();
+void SSD_voidDisable();
 
 #endif
