@@ -1,7 +1,13 @@
+/**
+ * @file    DIO_Interface.h
+ * @brief   Interface of the DIO Driver APIs and the Macros
+ * @author  Mohammed Diaa <mohammeddiaato@gmail.com>
+ * @date    25/8/2026
+ */
 
 #ifndef DIO_INTERFACE_H
 #define DIO_INTERFACE_H
-
+#include "../../LIB/STD_TYPES.h"
 
 #define DIO_PORTA      0
 #define DIO_PORTB      1

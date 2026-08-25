@@ -1,3 +1,9 @@
+/**
+ * @file    DIO_Private.h
+ * @brief   Has the Aaddresses of the Registers used by DIO Driver
+ * @author  Mohammed Diaa <mohammeddiaato@gmail.com>
+ * @date    25/8/2026
+ */
 
 #ifndef DIO_PRIVATE_H
 #define DIO_PRIVATE_H
