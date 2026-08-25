@@ -1,7 +1,7 @@
 /**
- * @file Seven_Seg_Config.h
- * @brief
- * @details
+ * @file    Seven_Seg_Config.h
+ * @brief   
+ * @details 
  * @author  Mohammed Diaa <mohammeddiaato@gmail.com>
  * 
  */
@@ -9,7 +9,12 @@
 #define _SEVEN_SEG_CONFIG_H_
 
 #include "../../MCAL/DIO/DIO_Interface.h"
-#define Segment_Type_CommonAnode
+
+
+
+#define Segment_Type_CommAnode      1 
+#define Segment_Type_CommCath       0    
+   
 
 #define Segment_A_Pin   DIO_u8_PIN0
 #define Segment_B_Pin   DIO_u8_PIN1
@@ -28,5 +33,7 @@
 #define Segment_G_Group  DIO_u8_PORTA
 
 #define SegmentPower_Pin DIO_u8_PIN7
+
+
 
 #endif
