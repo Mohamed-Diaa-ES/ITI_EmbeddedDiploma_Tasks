@@ -1,2 +1,2 @@
    text	   data	    bss	    dec	    hex	filename
-    580	      0	      0	    580	    244	C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\Assignment7\release\firmware.elf
+    656	     10	      0	    666	    29a	C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\Assignment7\release\firmware.elf
