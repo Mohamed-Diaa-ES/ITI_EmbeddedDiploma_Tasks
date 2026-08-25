@@ -33,7 +33,7 @@
 
 void SSD_voidInitialDataPort();
 void SSD_voidSendNumber(   u8 Number );
-void SSD_voidSenditem(   u8 Number );
+// void SSD_voidSenditem(   u8 Number );
 void SSD_voidEnable();
 void SSD_voidDisable();
 
