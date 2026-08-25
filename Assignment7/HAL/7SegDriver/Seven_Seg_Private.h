@@ -27,16 +27,16 @@
  * Common Anode is the flip of the number
  * CommonANODE ==~ commoncathode and vice versa
  */
-#define CommonAnode_Number_0 ~(u8)(CommonCathode_Number_0)
-#define CommonAnode_Number_1 ~(u8)(CommonCathode_Number_1)
-#define CommonAnode_Number_2 ~(u8)(CommonCathode_Number_2)
-#define CommonAnode_Number_3 ~(u8)(CommonCathode_Number_3)
-#define CommonAnode_Number_4 ~(u8)(CommonCathode_Number_4)
-#define CommonAnode_Number_5 ~(u8)(CommonCathode_Number_5)
-#define CommonAnode_Number_6 ~(u8)(CommonCathode_Number_6)
-#define CommonAnode_Number_7 ~(u8)(CommonCathode_Number_7)
-#define CommonAnode_Number_8 ~(u8)(CommonCathode_Number_8)
-#define CommonAnode_Number_9 ~(u8)(CommonCathode_Number_9)
+#define CommonAnode_Number_0    ~(u8)(CommonCathode_Number_0)
+#define CommonAnode_Number_1    ~(u8)(CommonCathode_Number_1)
+#define CommonAnode_Number_2    ~(u8)(CommonCathode_Number_2)
+#define CommonAnode_Number_3    ~(u8)(CommonCathode_Number_3)
+#define CommonAnode_Number_4    ~(u8)(CommonCathode_Number_4)
+#define CommonAnode_Number_5    ~(u8)(CommonCathode_Number_5)
+#define CommonAnode_Number_6    ~(u8)(CommonCathode_Number_6)
+#define CommonAnode_Number_7    ~(u8)(CommonCathode_Number_7)
+#define CommonAnode_Number_8    ~(u8)(CommonCathode_Number_8)
+#define CommonAnode_Number_9    ~(u8)(CommonCathode_Number_9)
 
 #define SevenSegMentArrCommAnode \
     {CommonAnode_Number_0,       \
