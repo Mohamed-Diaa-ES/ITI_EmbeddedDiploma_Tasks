@@ -1,0 +1,32 @@
+compile to exe file command:
+
+gcc main.c PATIENT_interface.c RESERVATION_interface.c SYSTEM_interface.c -o prog
+
+
+run command:
+
+prog.exe
+
+
+
+Important notes:
+
+1- you can add #define as you like.
+2- some #define is there to guide you to the sol you can ignore it. 
+3- add your name at the top of every file (be proud of your work )
+4- do not change the functions with prototype named as the same file at all (interface functions)
+ex : FILE.c -----> void FILE_Func(Arg1,Arg2);
+5- do not change the structs at all
+6- do not write any prototype of custom func in FILE.h
+7- do not be shy to ask 
+8- use interface functions between file1.c file2.c 
+
+*****************************************************************************************
+****************after reading this file open all project files in this order**************
+1-main.c
+2-SYSTEM_interface.h
+3-PATIENT_interface.h
+4-RESERVATION_interface.h
+5-the rest
+
+
