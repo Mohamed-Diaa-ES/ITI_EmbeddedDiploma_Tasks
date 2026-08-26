@@ -7,4 +7,6 @@
 #ifndef _KPD_PRIVATE_H_
 #define _KPD_PRIVATE_H_
 
+
+#define InitMask_ForSamePort    0xF0
 #endif
