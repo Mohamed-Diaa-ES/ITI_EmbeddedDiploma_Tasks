@@ -104,7 +104,7 @@ u8 PATIENT_u8AddPatientInfo(u8 *id, u8 *name, u32 age, u8 gender);
 /**
  * @fn      PATIENT_u8EditPatientInfo
  * @brief   Updates an existing patient's data.
- * @details Finds the patient by ID and updates their information. For example, it changes their name or age.
+ * @details Finds the patient by ID and updates their information. it changes their name or age.
  * @param   id Pointer to the existing patient's ID string.
  * @param   name Pointer to the updated name string.
  * @param   age The updated age.

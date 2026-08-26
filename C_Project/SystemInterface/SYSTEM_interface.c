@@ -1,5 +1,8 @@
-/*
- * Author: Mohammed Diaa <mohammeddiaato@gmail.com>
+/**
+ * @file
+ * @brief
+ * @details
+ * @author Mohammed Diaa mohammeddiaato@gmail.com
  */
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -9,7 +12,10 @@
 #include "PATIENT_interface.h"
 #include "RESERVATION_interface.h"
 #include "SYSTEM_interface.h"
-
+/**
+ * @var
+ * @brief
+ */
 static System_t MyClinicSystem;
 
 void ClearScreen()
@@ -238,7 +244,7 @@ u8 SYSTEM_u8DisplayPatientInfo()
 {
     u8 id[MAX_ID_SIZE];
     printf("Enter ID: ");
-    scanf("%s", id);
+    scanf("%49s", id); // 49 is the maximum chars possible 
     
     u8 status = PATIENT_u8ViewPatientInfoByID(id);
     if (status != 1) // Assuming Success macro resolves to 1 based on your previous edit
@@ -263,16 +269,16 @@ u8 SYSTEM_u8AddPatientInfo()
     u8 gender;
 
     printf("Enter ID: ");
-    scanf("%s", id);
+    scanf("%49s", id); // 49 is the maximum chars possible 
     
     printf("Enter Name: ");
-    scanf("%s", name);
+    scanf("%49s", name); // 49 is the maximum chars possible 
     
     printf("Enter age: ");
     scanf("%d", &age);
     
     printf("Enter Gender: ");
-    scanf("%s", genderInput);
+    scanf("%9s", genderInput); // 9 is the maximum chars possible 
     
     // Map text to enum
     if (genderInput[0] == 'm' || genderInput[0] == 'M')
@@ -304,7 +310,7 @@ u8 SYSTEM_u8EditPatientInfo()
     u8 gender;
 
     printf("Enter ID: ");
-    scanf("%s", id);
+    scanf("%49s", id);// 49 is the maximum chars possible 
     
     // Validate ID exists first before asking for new data
     Patient_t* p = PATIENT_xPGetPatientFromID(id);
@@ -315,13 +321,13 @@ u8 SYSTEM_u8EditPatientInfo()
     }
 
     printf("Enter Name: ");
-    scanf("%s", name);
+    scanf("%49s", name);    // 49 is the maximum chars possible 
     
     printf("Enter age: ");
     scanf("%d", &age);
     
     printf("Enter Gender: ");
-    scanf("%s", genderInput);
+    scanf("%9s", genderInput);// 9 is the maximum chars possible 
     
     if (genderInput[0] == 'm' || genderInput[0] == 'M')
     {
@@ -350,7 +356,7 @@ u8 SYSTEM_u8AddReservation()
     RESERVATION_voidViewReservations();
     
     printf("Enter ID To Book: ");
-    scanf("%s", id);
+    scanf("%49s", id); // 49 is the maximum chars possible 
     
     Patient_t* patient = PATIENT_xPGetPatientFromID(id);
     if (patient == NULL)
@@ -418,7 +424,7 @@ u8 SYSTEM_u8InputPassword(u8 *str_password)
     // Ensure the pointer is valid before writing to it
     if (str_password != NULL)
     {
-        scanf("%s", str_password);
+        scanf("%99s", str_password);// 99 is the maximum chars possible 
         return 1; // Success
     }
     return NULL_POINTER_TO_INPUT_PASSWORD; // Error

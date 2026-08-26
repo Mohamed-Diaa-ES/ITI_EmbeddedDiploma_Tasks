@@ -8,7 +8,10 @@
 #include <string.h>
 #include "STD_TYPES.h"
 #include "PATIENT_interface.h"
-
+/**
+ * @var     Patients_List
+ * @brief   Array that holds the records of all patients. It stores names, IDs, and ages.
+ */
 static Patient_t Patients_List[MAX_PATIENTS_SLOTS];
 
 void PATIENT_voidInit()

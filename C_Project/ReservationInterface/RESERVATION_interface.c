@@ -1,13 +1,23 @@
-/*
- * Author: Mohammed Diaa <mohammeddiaato@gmail.com>
+/**
+ * @file    RESERVATION_interface.c
+ * @brief   Implementation file for managing reservations.
+ * @details Contains the functions to create, cancel, and view time slots. 
+ * @author  Mohammed Diaa mohammeddiaato@gmail.com
  */
 #include <stdio.h>
 #include <string.h>
 #include "STD_TYPES.h"
 #include "PATIENT_interface.h"
 #include "RESERVATION_interface.h"
-
+/**
+ * @var     reservationTimeStr
+ * @brief   List of text strings showing the schedule. it holds text like "2pm to 2:30pm".
+ */
 static u8 reservationTimeStr[MAX_RESERVATIONS_SLOTS][50];
+/** 
+ * @var     Reservations_List
+ * @brief   Array that holds the booking status and patient data for each time slot.
+ */
 static Reservation_t Reservations_List[MAX_RESERVATIONS_SLOTS];
 
 void RESERVATION_voidInit()
@@ -77,7 +87,7 @@ u8 RESERVATION_u8CancelReservation(RESERVATIONS_SlotsTimes SlotTime)
 
 	u32 index = SlotTime - 1;
 
-	// Free up the slot if it is currently reserved
+	// make  the slot free  if it is currently reserved
 	if (Reservations_List[index].slotReserved == RESERVATION_RESERVED)
 	{
 		Reservations_List[index].Patient = NULL;

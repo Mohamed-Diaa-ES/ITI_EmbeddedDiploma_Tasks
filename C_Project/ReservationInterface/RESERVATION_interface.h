@@ -72,7 +72,7 @@ void RESERVATION_voidInit();
 /**
 * @fn      RESERVATION_u8CancelReservation
 * @brief   Cancels a patient's reservation.
-* @details Clears the slot so it can be booked by someone else. For example, it changes the status to unreserved.
+* @details Clears the slot so it can be booked by someone else. it changes the status to unreserved.
 * @param   SlotTime The specific time slot to cancel.
 * @return  Status code indicating success or a cancellation error.
 */
@@ -81,7 +81,7 @@ u8 RESERVATION_u8CancelReservation(RESERVATIONS_SlotsTimes SlotTime);
 /**
 * @fn      RESERVATION_u8AddReservation
 * @brief   Books a new reservation for a patient.
-* @details Assigns a patient to an empty time slot. For example, it fails if the slot is already taken.
+* @details Assigns a patient to an empty time slot. it fails if the slot is already taken.
 * @param   Patient Pointer to the patient structure making the reservation.
 * @param   SlotTime The specific time slot to book.
 * @return  Status code indicating success or an add error.
