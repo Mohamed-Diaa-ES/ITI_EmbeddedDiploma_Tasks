@@ -1,6 +1,6 @@
 
 #include "MCAL/DIO/DIO_Interface.h"
-#include "HAL/7SegDriver/Seven_Seg_Interface.h"
+// #include "HAL/7SegDriver/Seven_Seg_Interface.h"
 #include "HAL/LCD/LCD_Interface.h"
 #include <util/delay.h>
 
