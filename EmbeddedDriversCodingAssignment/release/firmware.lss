@@ -137,14 +137,14 @@ Disassembly of section .text:
   c8:	89 83       	std	Y+1, r24	; 0x01
   ca:	41 e0       	ldi	r20, 0x01	; 1
   cc:	61 e0       	ldi	r22, 0x01	; 1
-  ce:	82 e0       	ldi	r24, 0x02	; 2
+  ce:	81 e0       	ldi	r24, 0x01	; 1
   d0:	0e 94 ff 01 	call	0x3fe	; 0x3fe <DIO_voidSetPinValue>
   d4:	69 81       	ldd	r22, Y+1	; 0x01
   d6:	80 e0       	ldi	r24, 0x00	; 0
   d8:	0e 94 a6 02 	call	0x54c	; 0x54c <DIO_voidSetPortValue>
   dc:	41 e0       	ldi	r20, 0x01	; 1
   de:	60 e0       	ldi	r22, 0x00	; 0
-  e0:	82 e0       	ldi	r24, 0x02	; 2
+  e0:	81 e0       	ldi	r24, 0x01	; 1
   e2:	0e 94 ff 01 	call	0x3fe	; 0x3fe <DIO_voidSetPinValue>
   e6:	8f e9       	ldi	r24, 0x9F	; 159
   e8:	9f e0       	ldi	r25, 0x0F	; 15
@@ -158,7 +158,7 @@ Disassembly of section .text:
   f0:	00 00       	nop
   f2:	40 e0       	ldi	r20, 0x00	; 0
   f4:	60 e0       	ldi	r22, 0x00	; 0
-  f6:	82 e0       	ldi	r24, 0x02	; 2
+  f6:	81 e0       	ldi	r24, 0x01	; 1
   f8:	0e 94 ff 01 	call	0x3fe	; 0x3fe <DIO_voidSetPinValue>
   fc:	8f e9       	ldi	r24, 0x9F	; 159
   fe:	9f e0       	ldi	r25, 0x0F	; 15
@@ -184,14 +184,14 @@ Disassembly of section .text:
  11a:	89 83       	std	Y+1, r24	; 0x01
  11c:	40 e0       	ldi	r20, 0x00	; 0
  11e:	61 e0       	ldi	r22, 0x01	; 1
- 120:	82 e0       	ldi	r24, 0x02	; 2
+ 120:	81 e0       	ldi	r24, 0x01	; 1
  122:	0e 94 ff 01 	call	0x3fe	; 0x3fe <DIO_voidSetPinValue>
  126:	69 81       	ldd	r22, Y+1	; 0x01
  128:	80 e0       	ldi	r24, 0x00	; 0
  12a:	0e 94 a6 02 	call	0x54c	; 0x54c <DIO_voidSetPortValue>
  12e:	41 e0       	ldi	r20, 0x01	; 1
  130:	60 e0       	ldi	r22, 0x00	; 0
- 132:	82 e0       	ldi	r24, 0x02	; 2
+ 132:	81 e0       	ldi	r24, 0x01	; 1
  134:	0e 94 ff 01 	call	0x3fe	; 0x3fe <DIO_voidSetPinValue>
  138:	8f e9       	ldi	r24, 0x9F	; 159
  13a:	9f e0       	ldi	r25, 0x0F	; 15
@@ -205,7 +205,7 @@ Disassembly of section .text:
  142:	00 00       	nop
  144:	40 e0       	ldi	r20, 0x00	; 0
  146:	60 e0       	ldi	r22, 0x00	; 0
- 148:	82 e0       	ldi	r24, 0x02	; 2
+ 148:	81 e0       	ldi	r24, 0x01	; 1
  14a:	0e 94 ff 01 	call	0x3fe	; 0x3fe <DIO_voidSetPinValue>
  14e:	8f e9       	ldi	r24, 0x9F	; 159
  150:	9f e0       	ldi	r25, 0x0F	; 15
@@ -228,11 +228,11 @@ Disassembly of section .text:
  166:	0e 94 b6 02 	call	0x56c	; 0x56c <DIO_voidSetPortDirection>
  16a:	41 e0       	ldi	r20, 0x01	; 1
  16c:	60 e0       	ldi	r22, 0x00	; 0
- 16e:	82 e0       	ldi	r24, 0x02	; 2
+ 16e:	81 e0       	ldi	r24, 0x01	; 1
  170:	0e 94 45 02 	call	0x48a	; 0x48a <DIO_voidSetPinDirection>
  174:	41 e0       	ldi	r20, 0x01	; 1
  176:	61 e0       	ldi	r22, 0x01	; 1
- 178:	82 e0       	ldi	r24, 0x02	; 2
+ 178:	81 e0       	ldi	r24, 0x01	; 1
  17a:	0e 94 45 02 	call	0x48a	; 0x48a <DIO_voidSetPinDirection>
  17e:	8f e3       	ldi	r24, 0x3F	; 63
  180:	9c e9       	ldi	r25, 0x9C	; 156
