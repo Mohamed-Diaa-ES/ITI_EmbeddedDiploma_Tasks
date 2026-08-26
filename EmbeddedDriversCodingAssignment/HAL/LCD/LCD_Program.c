@@ -51,10 +51,54 @@ void LCD_voidSendCommand(u8 Command)
     _delay_ms(2);
 }
 
-void LCD_voidSendString(u8 *PcString);
-void LCD_voidSendNumber(s32 s32Number);
-void LCD_voidSetPosition(u8 u8X, u8 u8Y);
-void LCD_voidClearDisplay(void);
-void LCD_voidReturnHome(void);
+void LCD_voidSendString(u8 *PcString)
+{
+    if (PcString)
+    {
+        for (int i = 0; PcString[i] != '\0'; i++)
+        {
+            LCD_voidSendData(PcString[i]);
+        }
+    }
+}
+void LCD_voidSendNumber(s32 Number)
+{
+    u8 digits[10];
+    if (Number < 0)
+    {
+        LCD_voidSendData('-');
+        Number *= -1;
+    }
+    else if (Number == 0)
+    {
 
-void LCD_voidSendSpecialCharecter(u8 u8BlockNum, u8 *Pu8ArrayPattern, u8 u8X, u8 u8Y);
+        LCD_voidSendData('0');
+        return;
+    }
+    int i = 0;
+    for (; Number != 0; i++)
+    {
+        // to transform it to a character to be understood by the LCD 
+        digits[i] = (Number % 10) +'0'; 
+        Number /= 10;
+    }
+
+    for (;i>=0; i--)
+    {
+        LCD_voidSendData(digits[i]);
+    }
+}
+void LCD_voidSetPosition(u8 u8X, u8 u8Y)
+{
+    
+}
+void LCD_voidClearDisplay(void)
+{
+}
+void LCD_voidReturnHome(void)
+{
+}
+
+void LCD_voidSendSpecialCharecter(u8 u8BlockNum, u8 *Pu8ArrayPattern, u8 u8X, u8 u8Y)
+{
+}

@@ -23,7 +23,7 @@ void LCD_voidSendData(u8 Data);
 void LCD_voidSendCommand(u8 Command);
 
 void LCD_voidSendString(u8 *PcString);
-void LCD_voidSendNumber(s32 s32Number);
+void LCD_voidSendNumber(s32 Number);
 void LCD_voidSetPosition(u8 X, u8 Y);
 void LCD_voidClearDisplay(void);
 void LCD_voidReturnHome(void);
