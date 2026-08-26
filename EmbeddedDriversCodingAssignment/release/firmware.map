@@ -138,7 +138,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x694
+.text           0x00000000      0x69c
  *(.vectors)
  .vectors       0x00000000       0x54 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -244,81 +244,81 @@ END GROUP
  .text          0x000005bc        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
                 0x000005bc                        . = ALIGN (0x2)
  *(.text.*)
- .text.startup  0x000005bc       0x52 C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\main.c.o
+ .text.startup  0x000005bc       0x5a C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\main.c.o
                 0x000005bc                main
  .text.libgcc.mul
-                0x0000060e        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_divmodsi4.o)
+                0x00000616        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_divmodsi4.o)
  .text.libgcc.div
-                0x0000060e       0x2e C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_divmodsi4.o)
-                0x0000060e                __divmodsi4
- .text.libgcc   0x0000063c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_divmodsi4.o)
+                0x00000616       0x2e C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_divmodsi4.o)
+                0x00000616                __divmodsi4
+ .text.libgcc   0x00000644        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_divmodsi4.o)
  .text.libgcc.prologue
-                0x0000063c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_divmodsi4.o)
+                0x00000644        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_divmodsi4.o)
  .text.libgcc.builtins
-                0x0000063c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_divmodsi4.o)
+                0x00000644        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_divmodsi4.o)
  .text.libgcc.fmul
-                0x0000063c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_divmodsi4.o)
+                0x00000644        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_divmodsi4.o)
  .text.libgcc.fixed
-                0x0000063c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_divmodsi4.o)
+                0x00000644        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_divmodsi4.o)
  .text.libgcc.mul
-                0x0000063c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
+                0x00000644        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
  .text.libgcc.div
-                0x0000063c       0x10 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
-                0x0000063c                __negsi2
- .text.libgcc   0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
+                0x00000644       0x10 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
+                0x00000644                __negsi2
+ .text.libgcc   0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
  .text.libgcc.prologue
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
  .text.libgcc.builtins
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
  .text.libgcc.fmul
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
  .text.libgcc.fixed
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
  .text.libgcc.mul
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
  .text.libgcc.div
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
  .text.libgcc.prologue
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
  .text.libgcc.builtins
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
  .text.libgcc.fmul
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
  .text.libgcc.fixed
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
  .text.libgcc.mul
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
  .text.libgcc.div
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
- .text.libgcc   0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
  .text.libgcc.prologue
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
  .text.libgcc.builtins
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
  .text.libgcc.fmul
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
  .text.libgcc.fixed
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
  .text.libgcc.mul
-                0x0000064c        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x00000654        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc.div
-                0x0000064c       0x44 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x0000064c                __udivmodsi4
- .text.libgcc   0x00000690        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x00000654       0x44 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x00000654                __udivmodsi4
+ .text.libgcc   0x00000698        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc.prologue
-                0x00000690        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x00000698        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc.builtins
-                0x00000690        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x00000698        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc.fmul
-                0x00000690        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x00000698        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc.fixed
-                0x00000690        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x00000690                        . = ALIGN (0x2)
+                0x00000698        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x00000698                        . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000690        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
-                0x00000690                _exit
-                0x00000690                exit
+ .fini9         0x00000698        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
+                0x00000698                _exit
+                0x00000698                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -337,17 +337,17 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000690        0x4 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000698        0x4 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
  *(.hightext)
  *(.hightext*)
  *(.progmemx.*)
-                0x00000694                        . = ALIGN (0x2)
+                0x0000069c                        . = ALIGN (0x2)
  *(.jumptables)
  *(.jumptables*)
-                0x00000694                        _etext = .
+                0x0000069c                        _etext = .
 
-.data           0x00800060       0x1e load address 0x00000694
+.data           0x00800060       0x1a load address 0x0000069c
                 0x00800060                        PROVIDE (__data_start = .)
  *(.data)
  .data          0x00800060        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5/crtatmega32.o
@@ -364,37 +364,39 @@ END GROUP
  *(.gnu.linkonce.d*)
  *(.rodata)
  .rodata        0x00800060        0xa C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\HAL\7SegDriver\Seven_Seg_Program.c.o
- .rodata        0x0080006a       0x14 C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\main.c.o
+ .rodata        0x0080006a        0x8 C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\main.c.o
  *(.rodata*)
+ .rodata.str1.1
+                0x00800072        0x8 C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\main.c.o
  *(.gnu.linkonce.r*)
-                0x0080007e                        . = ALIGN (0x2)
-                0x0080007e                        _edata = .
-                0x0080007e                        PROVIDE (__data_end = .)
+                0x0080007a                        . = ALIGN (0x2)
+                0x0080007a                        _edata = .
+                0x0080007a                        PROVIDE (__data_end = .)
 
-.bss            0x0080007e        0x0
+.bss            0x0080007a        0x0
                 [!provide]                        PROVIDE (__bss_start = .)
  *(.bss)
- .bss           0x0080007e        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5/crtatmega32.o
- .bss           0x0080007e        0x0 C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\HAL\7SegDriver\Seven_Seg_Program.c.o
- .bss           0x0080007e        0x0 C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\HAL\LCD\LCD_Program.c.o
- .bss           0x0080007e        0x0 C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\main.c.o
- .bss           0x0080007e        0x0 C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\MCAL\DIO\DIO_Program.c.o
- .bss           0x0080007e        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_divmodsi4.o)
- .bss           0x0080007e        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
- .bss           0x0080007e        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
- .bss           0x0080007e        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
- .bss           0x0080007e        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
+ .bss           0x0080007a        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5/crtatmega32.o
+ .bss           0x0080007a        0x0 C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\HAL\7SegDriver\Seven_Seg_Program.c.o
+ .bss           0x0080007a        0x0 C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\HAL\LCD\LCD_Program.c.o
+ .bss           0x0080007a        0x0 C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\main.c.o
+ .bss           0x0080007a        0x0 C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\MCAL\DIO\DIO_Program.c.o
+ .bss           0x0080007a        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_divmodsi4.o)
+ .bss           0x0080007a        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
+ .bss           0x0080007a        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
+ .bss           0x0080007a        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
+ .bss           0x0080007a        0x0 C:/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
  *(.bss*)
  *(COMMON)
                 [!provide]                        PROVIDE (__bss_end = .)
-                0x00000694                        __data_load_start = LOADADDR (.data)
-                0x000006b2                        __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000069c                        __data_load_start = LOADADDR (.data)
+                0x000006b6                        __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080007e        0x0
+.noinit         0x0080007a        0x0
                 [!provide]                        PROVIDE (__noinit_start = .)
  *(.noinit .noinit.* .gnu.linkonce.n.*)
                 [!provide]                        PROVIDE (__noinit_end = .)
-                0x0080007e                        _end = .
+                0x0080007a                        _end = .
                 [!provide]                        PROVIDE (__heap_start = .)
                 0x00000000                        __flmap_init_label = DEFINED (__flmap_noinit_start)?__flmap_noinit_start:0x0
                 0x00000000                        __flmap = DEFINED (__flmap)?__flmap:0x0
