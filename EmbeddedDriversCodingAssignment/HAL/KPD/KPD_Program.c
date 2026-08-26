@@ -23,6 +23,7 @@ const u8 KPD_Array[NumberOfRows][NumberOfColumns] =
 void KPD_voidInit()
 {
     DIO_voidSetPortDirection(KPD_Port,InitMask_ForSamePort);
+    // setting the columns to high and the rows to Pull up enabled inputs
     DIO_voidSetPortValue(KPD_Port,InitMask_ForSamePort);
 
 }
