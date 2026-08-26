@@ -6,6 +6,7 @@
 #include "../../MCAL/DIO/DIO_Interface.h"
 #include "../../LIB/STD_TYPES.h"
 #include "LCD_Interface.h"
+#include "LCD_Config.h"
 #include "LCD_Private.h"
 #include <util/delay.h>
 
@@ -27,13 +28,15 @@ void LCD_voidInit(void)
     _delay_ms(5);
     LCD_voidSendCommand(EntryModeSetCommand);
     _delay_ms(5);
+    LCD_voidSendCommand(DisplayOnCommand);
+    _delay_ms(5);
 }
 void LCD_voidSendData(u8 Data)
 {
-    DIO_voidSetPinValue(LCD_RSPin_Group, LCD_RSPin_Number, DIO_High);
+    DIO_voidSetPinValue(LCD_RSPin_Group, LCD_RSPin_Number, DIO_HIGH);
 
     // assuming RW is on the ground
-    DIO_voidSetPortValue(LCD_DataPins_Group, Command);
+    DIO_voidSetPortValue(LCD_DataPins_Group, Data);
     DIO_voidSetPinValue(LCD_ENPin_Group, LCD_ENPin_Number, DIO_HIGH);
     _delay_ms(2);
     DIO_voidSetPinValue(LCD_ENPin_Group, LCD_ENPin_Number, DIO_LOW);
@@ -78,27 +81,52 @@ void LCD_voidSendNumber(s32 Number)
     int i = 0;
     for (; Number != 0; i++)
     {
-        // to transform it to a character to be understood by the LCD 
-        digits[i] = (Number % 10) +'0'; 
+        // to transform it to a character to be understood by the LCD
+        digits[i] = (Number % 10) + '0';
         Number /= 10;
     }
-
-    for (;i>=0; i--)
+    while(i--)
     {
         LCD_voidSendData(digits[i]);
     }
 }
-void LCD_voidSetPosition(u8 u8X, u8 u8Y)
+void LCD_voidSetPosition(u8 X, u8 Y)
 {
-    
+    u8 Address = 0;
+
+    Address = X + (Y ? 0x40 : 0x00);
+    LCD_voidSendCommand(Set_DDRAM_Address(Address));
 }
 void LCD_voidClearDisplay(void)
 {
+    LCD_voidSendCommand(ClearDisplayCommand);
 }
 void LCD_voidReturnHome(void)
 {
+    LCD_voidSendCommand(ReturnHomeCommand);
 }
 
-void LCD_voidSendSpecialCharecter(u8 u8BlockNum, u8 *Pu8ArrayPattern, u8 u8X, u8 u8Y)
+void LCD_voidSendSpecialCharecter(u8 BlockNum, u8 *ArrayPattern, u8 X, u8 Y)
 {
+
+    if(ArrayPattern&& (BlockNum < 8))
+    {
+
+        u8 CGRAMAddress = BlockNum * 8;
+        
+      
+        LCD_voidSendCommand(Set_CGRAM_Address(CGRAMAddress));
+        
+     
+        for(u8 i = 0; i < 8; i++)
+        {
+            LCD_voidSendData(ArrayPattern[i]); 
+        }
+        
+     
+        LCD_voidSetPosition(X, Y);
+        
+
+        LCD_voidSendData(BlockNum);
+    }
 }
