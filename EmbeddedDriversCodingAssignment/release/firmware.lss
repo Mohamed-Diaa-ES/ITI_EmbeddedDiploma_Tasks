@@ -1,23 +1,23 @@
 
-C:\Users\we\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\firmware.elf:     file format elf32-avr
+C:\Users\twitter\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\firmware.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000007dc  00000000  00000000  00000074  2**1
+  0 .text         00000826  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000022  00800060  000007dc  00000850  2**0
+  1 .data         00000022  00800060  00000826  0000089a  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      0000002f  00000000  00000000  00000872  2**0
+  2 .comment      0000002f  00000000  00000000  000008bc  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000008a4  2**2
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000008ec  2**2
                   CONTENTS, READONLY, OCTETS
-  4 .debug_info   000004e6  00000000  00000000  000008e0  2**0
+  4 .debug_info   000004e6  00000000  00000000  00000928  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
-  5 .debug_abbrev 000004a3  00000000  00000000  00000dc6  2**0
+  5 .debug_abbrev 000004a3  00000000  00000000  00000e0e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
-  6 .debug_line   0000001d  00000000  00000000  00001269  2**0
+  6 .debug_line   0000001d  00000000  00000000  000012b1  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
-  7 .debug_str    00000196  00000000  00000000  00001286  2**0
+  7 .debug_str    00000196  00000000  00000000  000012ce  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -63,10 +63,10 @@ Disassembly of section .text:
   64:	b0 e0       	ldi	r27, 0x00	; 0
 
 00000066 <.Loc.3>:
-  66:	ec ed       	ldi	r30, 0xDC	; 220
+  66:	e6 e2       	ldi	r30, 0x26	; 38
 
 00000068 <.Loc.4>:
-  68:	f7 e0       	ldi	r31, 0x07	; 7
+  68:	f8 e0       	ldi	r31, 0x08	; 8
 
 0000006a <.Loc.5>:
   6a:	02 c0       	rjmp	.+4      	; 0x70 <.L__do_copy_data_start>
@@ -88,7 +88,7 @@ Disassembly of section .text:
 
 00000076 <L0^A>:
   76:	0e 94 9b 03 	call	0x736	; 0x736 <main>
-  7a:	0c 94 ec 03 	jmp	0x7d8	; 0x7d8 <_exit>
+  7a:	0c 94 11 04 	jmp	0x822	; 0x822 <_exit>
 
 0000007e <__bad_interrupt>:
   7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -615,7 +615,7 @@ Disassembly of section .text:
  402:	c7 01       	movw	r24, r14
  404:	92 01       	movw	r18, r4
  406:	a3 01       	movw	r20, r6
- 408:	0e 94 ab 03 	call	0x756	; 0x756 <__divmodsi4>
+ 408:	0e 94 d0 03 	call	0x7a0	; 0x7a0 <__divmodsi4>
  40c:	60 5d       	subi	r22, 0xD0	; 208
  40e:	f5 01       	movw	r30, r10
  410:	61 93       	st	Z+, r22
@@ -1163,195 +1163,232 @@ Disassembly of section .text:
  734:	08 95       	ret
 
 00000736 <main>:
- 736:	0e 94 6e 01 	call	0x2dc	; 0x2dc <LCD_voidInit>
- 73a:	0e 94 5f 00 	call	0xbe	; 0xbe <KPD_voidInit>
- 73e:	0e 94 86 00 	call	0x10c	; 0x10c <KPD_u8GetKey>
- 742:	0e 94 41 00 	call	0x82	; 0x82 <SSD_voidInitialDataPort>
+ 736:	0f 92       	push	r0
+ 738:	cd b7       	in	r28, 0x3d	; 61
+ 73a:	de b7       	in	r29, 0x3e	; 62
+ 73c:	41 e0       	ldi	r20, 0x01	; 1
+ 73e:	60 e0       	ldi	r22, 0x00	; 0
+ 740:	80 e0       	ldi	r24, 0x00	; 0
+ 742:	0e 94 02 03 	call	0x604	; 0x604 <DIO_voidSetPinDirection>
+ 746:	41 e0       	ldi	r20, 0x01	; 1
+ 748:	60 e0       	ldi	r22, 0x00	; 0
+ 74a:	80 e0       	ldi	r24, 0x00	; 0
+ 74c:	0e 94 bc 02 	call	0x578	; 0x578 <DIO_voidSetPinValue>
+ 750:	40 e0       	ldi	r20, 0x00	; 0
+ 752:	60 e0       	ldi	r22, 0x00	; 0
+ 754:	83 e0       	ldi	r24, 0x03	; 3
+ 756:	0e 94 02 03 	call	0x604	; 0x604 <DIO_voidSetPinDirection>
+ 75a:	41 e0       	ldi	r20, 0x01	; 1
+ 75c:	60 e0       	ldi	r22, 0x00	; 0
+ 75e:	83 e0       	ldi	r24, 0x03	; 3
+ 760:	0e 94 bc 02 	call	0x578	; 0x578 <DIO_voidSetPinValue>
+ 764:	81 e0       	ldi	r24, 0x01	; 1
+ 766:	89 83       	std	Y+1, r24	; 0x01
+ 768:	ae 01       	movw	r20, r28
+ 76a:	4f 5f       	subi	r20, 0xFF	; 255
+ 76c:	5f 4f       	sbci	r21, 0xFF	; 255
+ 76e:	60 e0       	ldi	r22, 0x00	; 0
+ 770:	83 e0       	ldi	r24, 0x03	; 3
+ 772:	0e 94 48 03 	call	0x690	; 0x690 <DIO_voidGetPinValue>
 
-00000746 <.L2>:
- 746:	0e 94 86 00 	call	0x10c	; 0x10c <KPD_u8GetKey>
- 74a:	81 15       	cp	r24, r1
- 74c:	e1 f3       	breq	.-8      	; 0x746 <.L2>
- 74e:	80 53       	subi	r24, 0x30	; 48
- 750:	0e 94 4a 00 	call	0x94	; 0x94 <SSD_voidSendNumber>
- 754:	f8 cf       	rjmp	.-16     	; 0x746 <.L2>
+00000776 <.L4>:
+ 776:	ae 01       	movw	r20, r28
+ 778:	4f 5f       	subi	r20, 0xFF	; 255
+ 77a:	5f 4f       	sbci	r21, 0xFF	; 255
+ 77c:	60 e0       	ldi	r22, 0x00	; 0
+ 77e:	83 e0       	ldi	r24, 0x03	; 3
+ 780:	0e 94 48 03 	call	0x690	; 0x690 <DIO_voidGetPinValue>
+ 784:	89 81       	ldd	r24, Y+1	; 0x01
+ 786:	81 11       	cpse	r24, r1
+ 788:	05 c0       	rjmp	.+10     	; 0x794 <.L2>
+ 78a:	40 e0       	ldi	r20, 0x00	; 0
+ 78c:	60 e0       	ldi	r22, 0x00	; 0
+ 78e:	0e 94 bc 02 	call	0x578	; 0x578 <DIO_voidSetPinValue>
+ 792:	f1 cf       	rjmp	.-30     	; 0x776 <.L4>
 
-00000756 <__divmodsi4>:
- 756:	05 2e       	mov	r0, r21
+00000794 <.L2>:
+ 794:	41 e0       	ldi	r20, 0x01	; 1
+ 796:	60 e0       	ldi	r22, 0x00	; 0
+ 798:	80 e0       	ldi	r24, 0x00	; 0
+ 79a:	0e 94 bc 02 	call	0x578	; 0x578 <DIO_voidSetPinValue>
+ 79e:	eb cf       	rjmp	.-42     	; 0x776 <.L4>
 
-00000758 <.Loc.1>:
- 758:	97 fb       	bst	r25, 7
+000007a0 <__divmodsi4>:
+ 7a0:	05 2e       	mov	r0, r21
 
-0000075a <.Loc.2>:
- 75a:	1e f4       	brtc	.+6      	; 0x762 <.L0^B1>
+000007a2 <.Loc.1>:
+ 7a2:	97 fb       	bst	r25, 7
 
-0000075c <.Loc.3>:
- 75c:	00 94       	com	r0
+000007a4 <.Loc.2>:
+ 7a4:	1e f4       	brtc	.+6      	; 0x7ac <.L0^B1>
 
-0000075e <.Loc.4>:
- 75e:	0e 94 c2 03 	call	0x784	; 0x784 <__negsi2>
+000007a6 <.Loc.3>:
+ 7a6:	00 94       	com	r0
 
-00000762 <.L0^B1>:
- 762:	57 fd       	sbrc	r21, 7
+000007a8 <.Loc.4>:
+ 7a8:	0e 94 e7 03 	call	0x7ce	; 0x7ce <__negsi2>
 
-00000764 <.Loc.6>:
- 764:	07 d0       	rcall	.+14     	; 0x774 <__divmodsi4_neg2>
+000007ac <.L0^B1>:
+ 7ac:	57 fd       	sbrc	r21, 7
 
-00000766 <.Loc.7>:
- 766:	0e 94 ca 03 	call	0x794	; 0x794 <__udivmodsi4>
+000007ae <.Loc.6>:
+ 7ae:	07 d0       	rcall	.+14     	; 0x7be <__divmodsi4_neg2>
 
-0000076a <.Loc.8>:
- 76a:	07 fc       	sbrc	r0, 7
+000007b0 <.Loc.7>:
+ 7b0:	0e 94 ef 03 	call	0x7de	; 0x7de <__udivmodsi4>
 
-0000076c <.Loc.9>:
- 76c:	03 d0       	rcall	.+6      	; 0x774 <__divmodsi4_neg2>
+000007b4 <.Loc.8>:
+ 7b4:	07 fc       	sbrc	r0, 7
 
-0000076e <.Loc.10>:
- 76e:	4e f4       	brtc	.+18     	; 0x782 <__divmodsi4_exit>
+000007b6 <.Loc.9>:
+ 7b6:	03 d0       	rcall	.+6      	; 0x7be <__divmodsi4_neg2>
 
-00000770 <.Loc.11>:
- 770:	0c 94 c2 03 	jmp	0x784	; 0x784 <__negsi2>
+000007b8 <.Loc.10>:
+ 7b8:	4e f4       	brtc	.+18     	; 0x7cc <__divmodsi4_exit>
 
-00000774 <__divmodsi4_neg2>:
- 774:	50 95       	com	r21
+000007ba <.Loc.11>:
+ 7ba:	0c 94 e7 03 	jmp	0x7ce	; 0x7ce <__negsi2>
 
-00000776 <.Loc.13>:
- 776:	40 95       	com	r20
+000007be <__divmodsi4_neg2>:
+ 7be:	50 95       	com	r21
 
-00000778 <.Loc.14>:
- 778:	30 95       	com	r19
+000007c0 <.Loc.13>:
+ 7c0:	40 95       	com	r20
 
-0000077a <.Loc.15>:
- 77a:	21 95       	neg	r18
+000007c2 <.Loc.14>:
+ 7c2:	30 95       	com	r19
 
-0000077c <.Loc.16>:
- 77c:	3f 4f       	sbci	r19, 0xFF	; 255
+000007c4 <.Loc.15>:
+ 7c4:	21 95       	neg	r18
 
-0000077e <.Loc.17>:
- 77e:	4f 4f       	sbci	r20, 0xFF	; 255
+000007c6 <.Loc.16>:
+ 7c6:	3f 4f       	sbci	r19, 0xFF	; 255
 
-00000780 <.Loc.18>:
- 780:	5f 4f       	sbci	r21, 0xFF	; 255
+000007c8 <.Loc.17>:
+ 7c8:	4f 4f       	sbci	r20, 0xFF	; 255
 
-00000782 <__divmodsi4_exit>:
- 782:	08 95       	ret
+000007ca <.Loc.18>:
+ 7ca:	5f 4f       	sbci	r21, 0xFF	; 255
 
-00000784 <__negsi2>:
- 784:	90 95       	com	r25
- 786:	80 95       	com	r24
- 788:	70 95       	com	r23
- 78a:	61 95       	neg	r22
- 78c:	7f 4f       	sbci	r23, 0xFF	; 255
- 78e:	8f 4f       	sbci	r24, 0xFF	; 255
- 790:	9f 4f       	sbci	r25, 0xFF	; 255
+000007cc <__divmodsi4_exit>:
+ 7cc:	08 95       	ret
 
-00000792 <.Loc.1>:
- 792:	08 95       	ret
+000007ce <__negsi2>:
+ 7ce:	90 95       	com	r25
+ 7d0:	80 95       	com	r24
+ 7d2:	70 95       	com	r23
+ 7d4:	61 95       	neg	r22
+ 7d6:	7f 4f       	sbci	r23, 0xFF	; 255
+ 7d8:	8f 4f       	sbci	r24, 0xFF	; 255
+ 7da:	9f 4f       	sbci	r25, 0xFF	; 255
 
-00000794 <__udivmodsi4>:
- 794:	a1 e2       	ldi	r26, 0x21	; 33
+000007dc <.Loc.1>:
+ 7dc:	08 95       	ret
 
-00000796 <.Loc.1>:
- 796:	1a 2e       	mov	r1, r26
+000007de <__udivmodsi4>:
+ 7de:	a1 e2       	ldi	r26, 0x21	; 33
 
-00000798 <.Loc.2>:
- 798:	aa 1b       	sub	r26, r26
+000007e0 <.Loc.1>:
+ 7e0:	1a 2e       	mov	r1, r26
 
-0000079a <.Loc.3>:
- 79a:	bb 1b       	sub	r27, r27
+000007e2 <.Loc.2>:
+ 7e2:	aa 1b       	sub	r26, r26
 
-0000079c <.Loc.4>:
- 79c:	fd 01       	movw	r30, r26
+000007e4 <.Loc.3>:
+ 7e4:	bb 1b       	sub	r27, r27
 
-0000079e <.Loc.5>:
- 79e:	0d c0       	rjmp	.+26     	; 0x7ba <__udivmodsi4_ep>
+000007e6 <.Loc.4>:
+ 7e6:	fd 01       	movw	r30, r26
 
-000007a0 <__udivmodsi4_loop>:
- 7a0:	aa 1f       	adc	r26, r26
+000007e8 <.Loc.5>:
+ 7e8:	0d c0       	rjmp	.+26     	; 0x804 <__udivmodsi4_ep>
 
-000007a2 <.Loc.7>:
- 7a2:	bb 1f       	adc	r27, r27
+000007ea <__udivmodsi4_loop>:
+ 7ea:	aa 1f       	adc	r26, r26
 
-000007a4 <.Loc.8>:
- 7a4:	ee 1f       	adc	r30, r30
+000007ec <.Loc.7>:
+ 7ec:	bb 1f       	adc	r27, r27
 
-000007a6 <.Loc.9>:
- 7a6:	ff 1f       	adc	r31, r31
+000007ee <.Loc.8>:
+ 7ee:	ee 1f       	adc	r30, r30
 
-000007a8 <.Loc.10>:
- 7a8:	a2 17       	cp	r26, r18
+000007f0 <.Loc.9>:
+ 7f0:	ff 1f       	adc	r31, r31
 
-000007aa <.Loc.11>:
- 7aa:	b3 07       	cpc	r27, r19
+000007f2 <.Loc.10>:
+ 7f2:	a2 17       	cp	r26, r18
 
-000007ac <.Loc.12>:
- 7ac:	e4 07       	cpc	r30, r20
+000007f4 <.Loc.11>:
+ 7f4:	b3 07       	cpc	r27, r19
 
-000007ae <.Loc.13>:
- 7ae:	f5 07       	cpc	r31, r21
+000007f6 <.Loc.12>:
+ 7f6:	e4 07       	cpc	r30, r20
 
-000007b0 <.Loc.14>:
- 7b0:	20 f0       	brcs	.+8      	; 0x7ba <__udivmodsi4_ep>
+000007f8 <.Loc.13>:
+ 7f8:	f5 07       	cpc	r31, r21
 
-000007b2 <.Loc.15>:
- 7b2:	a2 1b       	sub	r26, r18
+000007fa <.Loc.14>:
+ 7fa:	20 f0       	brcs	.+8      	; 0x804 <__udivmodsi4_ep>
 
-000007b4 <.Loc.16>:
- 7b4:	b3 0b       	sbc	r27, r19
+000007fc <.Loc.15>:
+ 7fc:	a2 1b       	sub	r26, r18
 
-000007b6 <.Loc.17>:
- 7b6:	e4 0b       	sbc	r30, r20
+000007fe <.Loc.16>:
+ 7fe:	b3 0b       	sbc	r27, r19
 
-000007b8 <.Loc.18>:
- 7b8:	f5 0b       	sbc	r31, r21
+00000800 <.Loc.17>:
+ 800:	e4 0b       	sbc	r30, r20
 
-000007ba <__udivmodsi4_ep>:
- 7ba:	66 1f       	adc	r22, r22
+00000802 <.Loc.18>:
+ 802:	f5 0b       	sbc	r31, r21
 
-000007bc <.Loc.20>:
- 7bc:	77 1f       	adc	r23, r23
+00000804 <__udivmodsi4_ep>:
+ 804:	66 1f       	adc	r22, r22
 
-000007be <.Loc.21>:
- 7be:	88 1f       	adc	r24, r24
+00000806 <.Loc.20>:
+ 806:	77 1f       	adc	r23, r23
 
-000007c0 <.Loc.22>:
- 7c0:	99 1f       	adc	r25, r25
+00000808 <.Loc.21>:
+ 808:	88 1f       	adc	r24, r24
 
-000007c2 <.Loc.23>:
- 7c2:	1a 94       	dec	r1
+0000080a <.Loc.22>:
+ 80a:	99 1f       	adc	r25, r25
 
-000007c4 <.Loc.24>:
- 7c4:	69 f7       	brne	.-38     	; 0x7a0 <__udivmodsi4_loop>
+0000080c <.Loc.23>:
+ 80c:	1a 94       	dec	r1
 
-000007c6 <.Loc.25>:
- 7c6:	60 95       	com	r22
+0000080e <.Loc.24>:
+ 80e:	69 f7       	brne	.-38     	; 0x7ea <__udivmodsi4_loop>
 
-000007c8 <.Loc.26>:
- 7c8:	70 95       	com	r23
+00000810 <.Loc.25>:
+ 810:	60 95       	com	r22
 
-000007ca <.Loc.27>:
- 7ca:	80 95       	com	r24
+00000812 <.Loc.26>:
+ 812:	70 95       	com	r23
 
-000007cc <.Loc.28>:
- 7cc:	90 95       	com	r25
+00000814 <.Loc.27>:
+ 814:	80 95       	com	r24
 
-000007ce <.Loc.29>:
- 7ce:	9b 01       	movw	r18, r22
+00000816 <.Loc.28>:
+ 816:	90 95       	com	r25
 
-000007d0 <.Loc.30>:
- 7d0:	ac 01       	movw	r20, r24
+00000818 <.Loc.29>:
+ 818:	9b 01       	movw	r18, r22
 
-000007d2 <.Loc.31>:
- 7d2:	bd 01       	movw	r22, r26
+0000081a <.Loc.30>:
+ 81a:	ac 01       	movw	r20, r24
 
-000007d4 <.Loc.32>:
- 7d4:	cf 01       	movw	r24, r30
+0000081c <.Loc.31>:
+ 81c:	bd 01       	movw	r22, r26
 
-000007d6 <.Loc.33>:
- 7d6:	08 95       	ret
+0000081e <.Loc.32>:
+ 81e:	cf 01       	movw	r24, r30
 
-000007d8 <_exit>:
- 7d8:	f8 94       	cli
+00000820 <.Loc.33>:
+ 820:	08 95       	ret
 
-000007da <__stop_program>:
- 7da:	ff cf       	rjmp	.-2      	; 0x7da <__stop_program>
+00000822 <_exit>:
+ 822:	f8 94       	cli
+
+00000824 <__stop_program>:
+ 824:	ff cf       	rjmp	.-2      	; 0x824 <__stop_program>
