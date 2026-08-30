@@ -7,10 +7,9 @@
 #include "../../MCAL/DIO/DIO_Interface.h"
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
-#include "KPD_Interface.h"
-#include "KPD_Private.h"
-#include "KPD_Config.h"
-#include <util/delay.h>
+#include "KPD4x4_Interface.h"
+#include "KPD4x4_Private.h"
+#include "KPD4x4_Config.h"
 
 u8 ColumnsPins[NumberOfColumns] = {
     Column_Number_One_Pin,
@@ -26,7 +25,7 @@ u8 RowsPins[NumberOfRows] = {
     Row_Number_Four_Pin,
 };
 
-void KPD_voidInit()
+void KPD4x4_voidInit()
 {
     u8 col, row;
 
@@ -45,7 +44,7 @@ void KPD_voidInit()
     }
 }
 
-u8 KPD_u8GetKey()
+u8 KPD4x4_u8GetKey()
 {
     const u8 KPD_Array[NumberOfRows][NumberOfColumns] =
     {

@@ -24,7 +24,7 @@ u8 RowsPins[NumberOfRows] = {
     Row_Number_Three_Pin,
 };
 
-void KPD_voidInit()
+void KPD3x3_voidInit()
 {
     u8 col, row;
 
@@ -43,7 +43,7 @@ void KPD_voidInit()
     }
 }
 
-u8 KPD_u8GetKey()
+u8 KPD3x3_u8GetKey()
 {
     const u8 KPD_Array[NumberOfRows][NumberOfColumns] =
         {
