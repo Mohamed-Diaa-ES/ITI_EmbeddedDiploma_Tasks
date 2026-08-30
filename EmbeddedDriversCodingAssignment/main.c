@@ -6,27 +6,24 @@
 int main(void)
 {
 
-    // setting two pins to control the switch
     DIO_voidSetPinDirection(DIO_PORTA, DIO_PIN0, DIO_OUTPUT);
-    DIO_voidSetPinValue(DIO_PORTA, DIO_PIN0, DIO_HIGH);
+    DIO_voidSetPinDirection(DIO_PORTA, DIO_PIN1, DIO_OUTPUT);
 
-    // setting pull up resistor to get the switch is pressed or not
-    DIO_voidSetPinDirection(DIO_PORTD, DIO_PIN0, DIO_INPUT);
-    DIO_voidSetPinValue(DIO_PORTD, DIO_PIN0, DIO_HIGH);
-    u8 PinPressed = 1;
-    DIO_voidGetPinValue(DIO_PORTD, DIO_PIN0, &PinPressed);
-    LCD_voidInit();
-    LCD_voidSendData('5');
+    DIO_voidSetPinValue(DIO_PORTA, DIO_PIN0, DIO_LOW);
+    DIO_voidSetPinValue(DIO_PORTA, DIO_PIN1, DIO_HIGH);
+
     while (1)
     {
-        DIO_voidGetPinValue(DIO_PORTD, DIO_PIN0, &PinPressed);
-
-        while (PinPressed == 0)
-        {
-            DIO_voidSetPinValue(DIO_PORTA, DIO_PIN0, DIO_LOW);
-            DIO_voidGetPinValue(DIO_PORTD, DIO_PIN0, &PinPressed);
-        }
+        _delay_ms(1000);
+        DIO_voidSetPinValue(DIO_PORTA, DIO_PIN0, DIO_LOW);
+        DIO_voidSetPinValue(DIO_PORTA, DIO_PIN1, DIO_HIGH);
+        _delay_ms(1000);
+        DIO_voidSetPinValue(DIO_PORTA, DIO_PIN1, DIO_LOW);
+        _delay_ms(1000);
+        
+        DIO_voidSetPinValue(DIO_PORTA, DIO_PIN1, DIO_LOW);
         DIO_voidSetPinValue(DIO_PORTA, DIO_PIN0, DIO_HIGH);
+
     }
 
     return 0;
