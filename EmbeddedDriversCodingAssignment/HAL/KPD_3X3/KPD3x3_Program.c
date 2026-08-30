@@ -10,7 +10,7 @@
 #include "KPD3x3_Interface.h"
 #include "KPD3x3_Private.h"
 #include "KPD3x3_Config.h"
-// #include <util/delay.h>
+#include <util/delay.h>
 
 u8 ColumnsPins[NumberOfColumns] = {
     Column_Number_One_Pin,
