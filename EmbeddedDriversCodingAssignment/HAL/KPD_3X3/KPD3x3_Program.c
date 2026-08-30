@@ -7,23 +7,21 @@
 #include "../../MCAL/DIO/DIO_Interface.h"
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
-#include "KPD_Interface.h"
-#include "KPD_Private.h"
-#include "KPD_Config.h"
-#include <util/delay.h>
+#include "KPD3x3_Interface.h"
+#include "KPD3x3_Private.h"
+#include "KPD3x3_Config.h"
+// #include <util/delay.h>
 
 u8 ColumnsPins[NumberOfColumns] = {
     Column_Number_One_Pin,
     Column_Number_Two_Pin,
     Column_Number_Three_Pin,
-    Column_Number_Four_Pin,
 };
 
 u8 RowsPins[NumberOfRows] = {
     Row_Number_One_Pin,
     Row_Number_Two_Pin,
     Row_Number_Three_Pin,
-    Row_Number_Four_Pin,
 };
 
 void KPD_voidInit()
@@ -48,12 +46,11 @@ void KPD_voidInit()
 u8 KPD_u8GetKey()
 {
     const u8 KPD_Array[NumberOfRows][NumberOfColumns] =
-    {
-        {'1', '2', '3', '4'},
-        {'5', '6', '7', '8'},
-        {'9', '0', 'A', 'C'},
-        {'U', 'E', 'F', 'H'}
-    };
+        {
+            {'1', '2', '3'},
+            {'4', '5', '6'},
+            {'7', '8', '9'},
+        };
 
     int col = 0, row = 0;
     u8 ReadingPressed = 1; // Default HIGH (not pressed due to pull-up)
@@ -74,7 +71,7 @@ u8 KPD_u8GetKey()
             {
                 _delay_ms(30); // Debounce delay
                 DIO_voidGetPinValue(KPD_Port, RowsPins[row], &ReadingPressed);
-                
+
                 if (ReadingPressed == 0) // Check if still pressed
                 {
                     KeyPressed = KPD_Array[row][col];
@@ -91,7 +88,7 @@ u8 KPD_u8GetKey()
                 }
             }
         }
-        
+
         // Deactivate column by driving it HIGH again
         DIO_voidSetPinValue(KPD_Port, ColumnsPins[col], DIO_HIGH);
     }

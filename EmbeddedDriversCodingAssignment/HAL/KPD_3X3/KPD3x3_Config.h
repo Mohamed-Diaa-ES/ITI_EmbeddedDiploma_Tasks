@@ -9,8 +9,8 @@
 
 #define KPD_Port    DIO_PORTD
 
-#define NumberOfRows    4
-#define NumberOfColumns 4
+#define NumberOfRows    3
+#define NumberOfColumns 3
 
 #define Row_Number_One      1
 #define Row_Number_Two      2
