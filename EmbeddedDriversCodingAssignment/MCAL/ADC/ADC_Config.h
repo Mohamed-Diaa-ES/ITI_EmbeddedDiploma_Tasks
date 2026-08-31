@@ -5,4 +5,6 @@
  */
 #ifndef _ADC_Config_H
 #define _ADC_Config_H
+
+#define PrescallerValue DivisionFactor_64
 #endif
