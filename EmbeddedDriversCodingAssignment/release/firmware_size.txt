@@ -1,2 +1,11 @@
-   text	   data	    bss	    dec	    hex	filename
-   2500	     26	      0	   2526	    9de	C:\Users\we\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\firmware.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    3118 bytes (9.5% Full)
+(.text + .data + .bootloader)
+
+Data:         28 bytes (1.4% Full)
+(.data + .bss + .noinit)
+
+

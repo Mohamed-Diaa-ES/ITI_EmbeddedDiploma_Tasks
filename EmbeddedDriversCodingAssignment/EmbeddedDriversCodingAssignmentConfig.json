@@ -21,7 +21,7 @@
   "customFlags": "-Wall -Wextra",
   "debugLevel": "g2",
   "debugFormat": "dwarf-2",
-  "interfaceType": "UART",
+  "interfaceType": "SPI",
   "port": "COM1 - Communications Port (COM1)",
   "baudRate": "9600",
   "timeout": "5000",

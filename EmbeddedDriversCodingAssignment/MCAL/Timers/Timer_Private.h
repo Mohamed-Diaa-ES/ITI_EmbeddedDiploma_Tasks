@@ -47,7 +47,7 @@ typedef enum
 } WaveForm_Modes_t;
 typedef enum
 {
-    Normal_PORT,
+    Normal_PORT_Fast_pwm,
     Toggle_OC0,
     Clear_OC0,
     Set_OC0,
@@ -71,7 +71,7 @@ Prescaller_1024,
 ExternalSource_FallingEdge,
 ExternalSource_RisingEdge,
     
-} COM_FAST_PWM_Modes_t;
+} PrescallerValues_t;
 
 #define CPU_Freq    8000000
 #define Timer0_Overflow_Value 256

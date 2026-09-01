@@ -10,8 +10,8 @@
 #include "Timer_Private.h"
 #include "Timer_Config.h"
 
-static u16 count_ms=0;
-
+static volatile u16 count_ms=0;
+static void(*Timer0_CallBack_GlobalSet)(void);
 u8 Timer0_u8Init()
 {
 
@@ -21,8 +21,11 @@ u8 Timer0_u8Init()
 
     CLR_BIT(Temp_Control, COM00);
     CLR_BIT(Temp_Control, COM01);
-
+    SET_BIT(TIMSK_Reg,TOIE0);
     Temp_Control |= PrescallerValue;
+    TCCR0_Reg=Temp_Control;
+    SET_BIT(SREG_Reg,Global_Interrupt_Pin);
+    return 1;
 }
 u8 Timer0_u8_my_delay_ms(u16 ms)
 {
@@ -31,21 +34,23 @@ u8 Timer0_u8_my_delay_ms(u16 ms)
     {
         
     }
-    
+    return 1;
 
 }
-u8 Timer0_u8SetCompareValue(u16 ms)
+u8 Timer0_u8SetCompareValue(u8 CompareValue)
 {
-
+    OCR0_Reg=CompareValue;
+    return 1;
 }
-void Timer0_voidSet_OVE_CallBack(void(*Timer0_CallBack))
+void Timer0_voidSet_OVE_CallBack(void(*Timer0_CallBack)(void))
 {
+    Timer0_CallBack_GlobalSet=Timer0_CallBack;
 }
 
 void __vector_11(void) __attribute__((signal));
 void __vector_11(void)
 {
-    if (count_ms >=0)
+    if (count_ms > 0)
     {
         count_ms--;
     }
