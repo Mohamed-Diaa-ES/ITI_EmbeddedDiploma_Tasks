@@ -73,6 +73,8 @@ ExternalSource_RisingEdge,
     
 } COM_FAST_PWM_Modes_t;
 
+#define CPU_Freq    8000000
+#define Timer0_Overflow_Value 256
 
 #define SREG_Reg *((volatile u8 *)0x5F)
 #define TCCR0_Reg *((volatile u8 *)0x53)
