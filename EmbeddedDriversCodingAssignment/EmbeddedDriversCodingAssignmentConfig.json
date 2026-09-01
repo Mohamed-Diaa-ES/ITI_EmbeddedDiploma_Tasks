@@ -1,7 +1,7 @@
 {
   "projectName": "EmbeddedDriversCodingAssignment",
-  "projectPath": "C:\\Users\\twitter\\Desktop\\ITI_Tasks\\ITI_EmbeddedDiploma_Tasks\\EmbeddedDriversCodingAssignment",
-  "outputPath": "C:\\Users\\twitter\\Desktop\\ITI_Tasks\\ITI_EmbeddedDiploma_Tasks\\EmbeddedDriversCodingAssignment",
+  "projectPath": "C:\\Users\\we\\Desktop\\ITI_Tasks\\ITI_EmbeddedDiploma_Tasks\\EmbeddedDriversCodingAssignment",
+  "outputPath": "C:\\Users\\we\\Desktop\\ITI_Tasks\\ITI_EmbeddedDiploma_Tasks\\EmbeddedDriversCodingAssignment",
   "outputName": "",
   "target": "AVR",
   "mcu": "atmega32",
@@ -25,6 +25,6 @@
   "port": "COM1 - Communications Port (COM1)",
   "baudRate": "9600",
   "timeout": "5000",
-  "firmwareFile": "C:\\Users\\twitter\\Desktop\\ITI_Tasks\\ITI_EmbeddedDiploma_Tasks\\EmbeddedDriversCodingAssignment/EmbeddedDriversCodingAssignment.hex",
+  "firmwareFile": "C:\\Users\\we\\Desktop\\ITI_Tasks\\ITI_EmbeddedDiploma_Tasks\\EmbeddedDriversCodingAssignment/EmbeddedDriversCodingAssignment.hex",
   "programmer": "usbasp"
 }

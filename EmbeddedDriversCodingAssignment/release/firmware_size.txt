@@ -1,11 +1,2 @@
-AVR Memory Usage
-----------------
-Device: atmega32
-
-Program:    2824 bytes (8.6% Full)
-(.text + .data + .bootloader)
-
-Data:         26 bytes (1.3% Full)
-(.data + .bss + .noinit)
-
-
+   text	   data	    bss	    dec	    hex	filename
+   2500	     26	      0	   2526	    9de	C:\Users\we\Desktop\ITI_Tasks\ITI_EmbeddedDiploma_Tasks\EmbeddedDriversCodingAssignment\release\firmware.elf

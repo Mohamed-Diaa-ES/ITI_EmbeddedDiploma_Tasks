@@ -63,3 +63,7 @@ ADC_Status_Codes_t ADC_u8ConvertSynch(u8 channel, u16 *ReadData)
 ADC_Status_Codes_t ADC_u8ConvertASynch(u8 channel, u16 *ReadData, void (*PtrFunc)(void))
 {
 }
+
+ADC_Status_Codes_t SET_CallBack(u8 channel, void (*PtrFunc)(u16 *))
+{
+}
