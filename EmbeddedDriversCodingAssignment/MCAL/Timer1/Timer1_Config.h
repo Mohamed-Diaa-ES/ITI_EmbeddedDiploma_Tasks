@@ -12,4 +12,10 @@
 #define PortAction      Normal_PORT
 
 #define Timer0_OverflowTime     1
+
+#define OCRA    1
+#define OCRB    0
+
+#define True_Setting 1
+#define False_Setting    0
 #endif

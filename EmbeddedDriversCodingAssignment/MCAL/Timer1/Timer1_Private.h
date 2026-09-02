@@ -87,6 +87,7 @@ typedef enum
 #define TCNT1_Reg *((volatile u16 *)0x4C)
 #define OCR1A_Reg *((volatile u16 *)0x4A)
 #define OCR1B_Reg *((volatile u16 *)0x48)
+#define ICR1_Reg *((volatile u16 *)0x46)
 #define TIMSK_Reg *((volatile u8 *)0x59)
 #define TIFR_Reg *((volatile u8 *)0x58)
 #define SFIOR_Reg *((volatile u8 *)0x50)
