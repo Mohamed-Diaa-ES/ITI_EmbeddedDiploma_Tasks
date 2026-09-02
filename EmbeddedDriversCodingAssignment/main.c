@@ -6,37 +6,30 @@
 
 int main(void)
 {
+    ADC_voidInit();
+    DIO_voidSetPinDirection(DIO_PORTA, DIO_PIN0, DIO_INPUT);
+    DIO_voidSetPortDirection(DIO_PORTB, ALL_OUTPUT);
 
-    DIO_voidSetPinDirection(DIO_PORTA, DIO_PIN0, DIO_OUTPUT);
-    DIO_voidSetPinDirection(DIO_PORTA, DIO_PIN1, DIO_OUTPUT);
-    DIO_voidSetPinDirection(DIO_PORTD, DIO_PIN0, DIO_INPUT);
-    DIO_voidSetPinValue(DIO_PORTD, DIO_PIN0, DIO_HIGH);
+    f32 Voltage_Ref_Val = 5;
+    u8 Channel = 0;
+    u16 ADC_Reading = 0;
 
-    DIO_voidSetPinValue(DIO_PORTA, DIO_PIN0, DIO_LOW);
-    DIO_voidSetPinValue(DIO_PORTA, DIO_PIN1, DIO_HIGH);
-
-    u8 val = 1;
     while (1)
     {
-        DIO_voidGetPinValue(DIO_PORTD, DIO_PIN0, &val);
-        if (val == 0)
+        ADC_u8ConvertSynch(Channel, &ADC_Reading);
+        f32 VoltageResult = ADC_f32TransformToVoltage(ADC_Reading);
+
+        for (int i = 1; i <= 3; i++)
         {
-            _delay_ms(20);
-            DIO_voidGetPinValue(DIO_PORTD, DIO_PIN0, &val);
-            if (val == 0)
+            if( (((VoltageResult > Voltage_Ref_Val * i / 3.0) ||(VoltageResult-1)>=3) ))
             {
-                // Turn RL1 OFF first, then turn RL3 ON
-                DIO_voidSetPinValue(DIO_PORTA, DIO_PIN1, DIO_LOW);
-                _delay_ms(10);
-                DIO_voidSetPinValue(DIO_PORTA, DIO_PIN0, DIO_HIGH);
+                DIO_voidSetPinValue(DIO_PORTB, DIO_PIN0 + (i - 1), DIO_HIGH);
             }
-        }
-        else
-        {
-            // Turn RL3 OFF first, then turn RL1 ON
-            DIO_voidSetPinValue(DIO_PORTA, DIO_PIN0, DIO_LOW);
-            _delay_ms(10);
-            DIO_voidSetPinValue(DIO_PORTA, DIO_PIN1, DIO_HIGH);
+            else
+            {
+                DIO_voidSetPinValue(DIO_PORTB, DIO_PIN0 + (i - 1), DIO_LOW);
+                break;
+            }
         }
     }
 

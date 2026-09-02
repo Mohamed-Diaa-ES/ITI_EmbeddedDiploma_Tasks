@@ -67,3 +67,10 @@ ADC_Status_Codes_t ADC_u8ConvertASynch(u8 channel, u16 *ReadData, void (*PtrFunc
 ADC_Status_Codes_t SET_CallBack(u8 channel, void (*PtrFunc)(u16 *))
 {
 }
+
+
+
+f32 ADC_f32TransformToVoltage(u16 ADC_Reading)
+{
+    return (ADC_Reading*5.0f)/1024;
+}

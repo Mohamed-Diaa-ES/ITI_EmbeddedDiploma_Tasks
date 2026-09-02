@@ -26,4 +26,6 @@ ADC_Status_Codes_t ADC_u8ConvertASynch(u8 channel,u16*ReadData,void (*PtrFunc)(v
 void ADC_voidEnable();
 void ADC_voidDisable();
 
+f32 ADC_f32TransformToVoltage(u16 ADC_Reading);
+
 #endif
