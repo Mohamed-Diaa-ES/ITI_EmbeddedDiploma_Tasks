@@ -31,7 +31,7 @@ typedef enum
 
 typedef enum
 {
-    TOIE1,
+    TOIE1=2,
     OCIE1B,
     OCIE1A,
     TICIE1,
@@ -39,7 +39,7 @@ typedef enum
 
 typedef enum
 {
-    TOV1,
+    TOV1=2,
     OCF1B,
     OCF1A,
     ICF1,
@@ -75,6 +75,7 @@ typedef enum
 {
     No_Clock_Source,
     Prescaller_1,
+    Prescaller_8,
     Prescaller_64,
     Prescaller_256,
     Prescaller_1024,

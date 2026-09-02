@@ -23,8 +23,9 @@
 #define OVERFLOW_TIME (0xFFFF * CLock_TIME)
 #define one_MilliSecond (1000 * CLock_TIME)
 
-#define Preloaded_Value_For_1ms     (0xFFFF - 1000)
-#define NumberOfCountsFor_OneSecond (1000*one_MilliSecond)/0xFFFF
-#define Preloaded_Value_For_oneSeoncd     (0xFFFF - 1000)
+#define Preloaded_Value_For_1ms (0xFFFF - 1000)
+#define NumberOfCountsFor_OneSecond_float ((1000.0 * one_MilliSecond) / 0xFFFF)
+#define NumberOfCountsFor_OneSecond_in ((1000 * one_MilliSecond) / 0xFFFF)
+#define Preloaded_Value_For_oneSeoncd (0xFFFF - 1000)
 
 #endif
