@@ -13,16 +13,19 @@ typedef enum
     ISC10,
     ISC11,
 } MCUCR_EXTI_Bits;
+
 typedef enum
 {
     ISC2 = 6,
 } MCUCSR_EXTI_Bits;
+
 typedef enum
 {
     INT2 = 5,
     INT0 = 6,
     INT1 = 7,
 } GICR_EXTI_Bits; // interrupt enable bits
+
 typedef enum
 {
     INTF2 = 5,
@@ -38,6 +41,7 @@ typedef enum
     Rising_Edge,
 
 } EXTI_0_1_SensControl_Options;
+
 typedef enum
 {
     Failling_Edge2,
@@ -47,4 +51,7 @@ typedef enum
 
 #define MCUCR_Reg *((volatile u8 *)0x55)
 #define MCUCSR_Reg *((volatile u8 *)0x54)
+#define GICR_Reg *((volatile u8 *)0x5B)
+#define GIFR_Reg *((volatile u8 *)0x5A)
+
 #endif

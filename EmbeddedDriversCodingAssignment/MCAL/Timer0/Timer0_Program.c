@@ -6,9 +6,9 @@
 
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
-#include "Timer_Interface.h"
-#include "Timer_Private.h"
-#include "Timer_Config.h"
+#include "Timer0_Interface.h"
+#include "Timer0_Private.h"
+#include "Timer0_Config.h"
 
 static volatile u16 count_ms=0;
 static void(*Timer0_CallBack_GlobalSet)(void);
