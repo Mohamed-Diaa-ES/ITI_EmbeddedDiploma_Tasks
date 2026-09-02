@@ -54,4 +54,10 @@ typedef enum
 #define GICR_Reg *((volatile u8 *)0x5B)
 #define GIFR_Reg *((volatile u8 *)0x5A)
 
+#define EXTI0_SenseControl_ClearingMask  0xFC
+#define EXTI1_SenseControl_ClearingMask ~0x0C
+#define EXTI1_SenseControl_ClearingMask ~0x40
+
+
+
 #endif
