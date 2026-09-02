@@ -19,14 +19,13 @@ typedef enum
 } TCCR1A_Bits_t;
 typedef enum
 {
-    TCCR1B,
     CS10,
     CS11,
     CS12,
-    WGM12 ,
-    WGM13 ,
-    ICES1=6,
-    ICNC1=7,
+    WGM12,
+    WGM13,
+    ICES1 = 6,
+    ICNC1 = 7,
 
 } TCCR1B_Bits_t;
 
@@ -48,10 +47,10 @@ typedef enum
 
 typedef enum
 {
-    Normal_Mode,
-    PWM_PhaseCorrect_Mode,
-    CTC_Mode,
-    PWM_FastPWM,
+    Normal_Mode = 0,
+    PWM_PhaseCorrect_ICR1 = 10,
+    CTC_ICR1 = 12,
+    PWM_FastPWM = 14,
 
 } WaveForm_Modes_t;
 typedef enum
@@ -61,7 +60,7 @@ typedef enum
     Clear_OCA_B,
     Set_OCA_B,
 
-} COM_NoNPWM_Modes_t;
+} COM_NoNPWM_Actions_t;
 
 typedef enum
 {
@@ -70,7 +69,7 @@ typedef enum
     Non_Inverting,
     Inverting,
 
-} COM_FAST_PWM_Modes_t;
+} COM_FAST_PWM_Actions_t;
 
 typedef enum
 {
@@ -95,4 +94,5 @@ typedef enum
 #define TCCR1A_Reg *((volatile u8 *)0x4F)
 #define TCCR1B_Reg *((volatile u8 *)0x4E)
 
+#define Prescaller_ClearingMask 0xF8
 #endif
