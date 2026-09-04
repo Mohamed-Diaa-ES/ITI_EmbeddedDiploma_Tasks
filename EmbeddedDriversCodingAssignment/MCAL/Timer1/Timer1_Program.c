@@ -1,21 +1,17 @@
-/**
- * @file    Timer_Program.c
- * @brief   This is the implementation of the Driver APIs and Helper Function
- * @author  Mohammed Diaa <mohammeddiaato@gmail.com>
- */
-
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
 #include "Timer1_Interface.h"
 #include "Timer1_Private.h"
 #include "Timer1_Config.h"
+#include <stddef.h> // Included for NULL definition
 
 static volatile u16 count_ms = 0;
-// static void (*Timer1_CallBack_GlobalSet)(void);
+static void (*Timer1_CallBack_GlobalSet)(void) = NULL;
+
 u8 Timer1_u8Init(u8 mode, u8 prescaller)
 {
+    TCCR1B_Reg = (TCCR1B_Reg & Prescaller_ClearingMask) | (prescaller & 0x07);
 
-    TCCR1B_Reg |= (Prescaller_ClearingMask & prescaller);
     switch (mode)
     {
     case Normal_Mode:
@@ -26,7 +22,6 @@ u8 Timer1_u8Init(u8 mode, u8 prescaller)
         TCNT1_Reg = Preloaded_Value_For_1ms;
         break;
     case PWM_PhaseCorrect_ICR1:
-
         CLR_BIT(TCCR1A_Reg, WGM10);
         SET_BIT(TCCR1A_Reg, WGM11);
         CLR_BIT(TCCR1B_Reg, WGM12);
@@ -43,18 +38,21 @@ u8 Timer1_u8Init(u8 mode, u8 prescaller)
         SET_BIT(TCCR1A_Reg, WGM11);
         SET_BIT(TCCR1B_Reg, WGM12);
         SET_BIT(TCCR1B_Reg, WGM13);
-        /* code */
         break;
-
     default:
-        break;
+        return False_Setting;
     }
 
     SET_BIT(TIMSK_Reg, TOIE1);
+    return True_Setting; 
 }
+
 u8 Timer1_u8_my_delay_ms(u16 ms)
 {
+    
+    return True_Setting; 
 }
+
 u8 Timer1_u8SetCompareValue(u16 CompareValue, u8 A_or_B)
 {
     if (A_or_B == OCRA)
@@ -69,38 +67,39 @@ u8 Timer1_u8SetCompareValue(u16 CompareValue, u8 A_or_B)
     }
     return False_Setting;
 }
+
 void Timer1_voidSet_OVE_CallBack(void (*Timer1_CallBack)(void))
 {
-    // Timer1_CallBack_GlobalSet = Timer1_CallBack;
+    Timer1_CallBack_GlobalSet = Timer1_CallBack; 
 }
 
 void __vector_9(void) __attribute__((signal));
 void __vector_9(void)
 {
-
     TCNT1_Reg = Preloaded_Value_For_1ms;
 
     count_ms++;
     if (count_ms == 1000)
     {
         count_ms = 0;
-    }
-    else
-    {
-        return;
-    }
+        
 
-    // if (Timer1_CallBack_GlobalSet != NULL)
-    
-        // Timer1_CallBack_GlobalSet();
-
-    
+        if (Timer1_CallBack_GlobalSet != NULL)
+        {
+            Timer1_CallBack_GlobalSet();
+        }
+    }
 }
 
 u8 Timer1_u8SetAction(u8 Action)
 {
+    CLR_BIT(TCCR1B_Reg,COM1B0);
+    SET_BIT(TCCR1B_Reg,COM1B0);
+    return True_Setting;
 }
+
 u8 Timer1_SetICR(u16 Value)
 {
     ICR1_Reg = Value;
+    return True_Setting; 
 }

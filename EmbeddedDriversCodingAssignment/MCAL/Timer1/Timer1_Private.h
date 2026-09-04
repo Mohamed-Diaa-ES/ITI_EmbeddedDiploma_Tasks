@@ -91,7 +91,6 @@ typedef enum
 #define TIMSK_Reg *((volatile u8 *)0x59)
 #define TIFR_Reg *((volatile u8 *)0x58)
 #define SFIOR_Reg *((volatile u8 *)0x50)
-#define SFIOR_Reg *((volatile u8 *)0x50)
 #define TCCR1A_Reg *((volatile u8 *)0x4F)
 #define TCCR1B_Reg *((volatile u8 *)0x4E)
 
