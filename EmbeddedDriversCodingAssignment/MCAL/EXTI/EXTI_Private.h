@@ -37,8 +37,8 @@ typedef enum
 {
     Low_Level,
     Any_logical,
-    Failling_Edge,
-    Rising_Edge,
+    Failling_Edge1_0,
+    Rising_Edge1_0,
 
 } EXTI_0_1_SensControl_Options;
 
@@ -49,14 +49,14 @@ typedef enum
 
 } EXTI_2_SensControl_Options;
 
-#define MCUCR_Reg *((volatile u8 *)0x55)
-#define MCUCSR_Reg *((volatile u8 *)0x54)
-#define GICR_Reg *((volatile u8 *)0x5B)
-#define GIFR_Reg *((volatile u8 *)0x5A)
+#define MCUCR_Reg   *((volatile u8 *)0x55)
+#define MCUCSR_Reg  *((volatile u8 *)0x54)
+#define GICR_Reg    *((volatile u8 *)0x5B)
+#define GIFR_Reg    *((volatile u8 *)0x5A)
 
 #define EXTI0_SenseControl_ClearingMask  0xFC
 #define EXTI1_SenseControl_ClearingMask ~0x0C
-#define EXTI1_SenseControl_ClearingMask ~0x40
+#define EXTI2_SenseControl_ClearingMask ~0x40
 
 
 
