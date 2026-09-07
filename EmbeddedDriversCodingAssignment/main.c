@@ -7,6 +7,25 @@
 #include "MCAL/Timer1/Timer1_Private.h"
 #include "MCAL/GIE/GIE_Interface.h"
 
+#define SPCR_Reg    *((volatile u8*)0x2D)
+#define SPDR_Reg    *((volatile u8*)0x2F)
+#define SPSR_Reg    *((volatile u8*)0x2E)
+void SPI_MasterInit(void)
+{
+/* Set MOSI and SCK output, all others input */
+    DIO_voidSetPortDirection(DIO_PORTA,0xA0);
+/* Enable SPI, Master, set clock rate fck/16 */
+SPCR_Reg = (1<<6)|(1<<4)|(1<<0);
+}
+void SPI_MasterTransmit(char cData)
+{
+/* Start transmission */
+SPDR_Reg = cData;
+/* Wait for transmission complete */
+while(!(SPSR_Reg & (1<<7)))
+;
+}
+
 void TogglePin()
 {
     static volatile u8 count = 0;
@@ -23,22 +42,13 @@ void TogglePin()
 
 int main(void)
 {
-    ADC_voidInit();
 
-    DIO_voidSetPinDirection(DIO_PORTB, DIO_PIN0, DIO_OUTPUT);
-    DIO_voidSetPinValue(DIO_PORTB, DIO_PIN0, DIO_HIGH);
-
-    Timer1_voidSet_OVE_CallBack(TogglePin);
-    Timer1_u8Init(PWM_FastPWM, Prescaller_8);
-    Timer1_SetICR(1999u);
-
-    GIE_Enable();
-    SET_BIT(SREG_Reg, 7); 
-
-
-
+    SPI_MasterInit();
+    LCD_voidInit();
+    u8 Result=0;
     while (1)
     {
+        SPI_MasterTransmit('5');
         
     }
 
