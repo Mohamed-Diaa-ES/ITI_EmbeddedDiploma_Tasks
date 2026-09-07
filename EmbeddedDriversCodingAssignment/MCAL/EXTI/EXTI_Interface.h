@@ -7,6 +7,7 @@
 #ifndef _EXTI_Interface_H
 #define _EXTI_Interface_H
 
+#include "EXTI_Private.h"
 typedef enum
 {
     EXTI_0,

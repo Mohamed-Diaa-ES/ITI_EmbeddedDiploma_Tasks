@@ -9,7 +9,6 @@
 #include "../GIE/GIE_Interface.h"
 #include "../DIO/DIO_Interface.h"
 #include "EXTI_Interface.h"
-#include "EXTI_Private.h"
 
 static void (*EXTI0_CallBack_GlobalSet)(void) = NULL;
 static void (*EXTI1_CallBack_GlobalSet)(void) = NULL;
@@ -23,20 +22,24 @@ void EXTI_voidInit(EXTI_Numbers_t EXTI_Number, u8 SourceControl)
     {
     case EXTI_0:
         DIO_voidSetPinDirection(EXTI0_DIO_Port, EXTI0_DIO_Pin, DIO_INPUT);
+        DIO_voidSetPinValue(EXTI0_DIO_Port, EXTI0_DIO_Pin, DIO_HIGH);
         MCUCR_Reg = (MCUCR_Reg & EXTI0_SenseControl_ClearingMask) | (SourceControl<<ISC00);
         break;
     case EXTI_1:
         DIO_voidSetPinDirection(EXTI1_DIO_Port, EXTI1_DIO_Pin, DIO_INPUT);
+        DIO_voidSetPinValue(EXTI1_DIO_Port, EXTI1_DIO_Pin, DIO_HIGH);
         MCUCR_Reg = (MCUCR_Reg & EXTI1_SenseControl_ClearingMask) | (SourceControl<<ISC10);
         break;
     case EXTI_2:
         DIO_voidSetPinDirection(EXTI2_DIO_Port, EXTI2_DIO_Pin, DIO_INPUT);
+        DIO_voidSetPinValue(EXTI2_DIO_Port, EXTI2_DIO_Pin, DIO_HIGH);
         MCUCSR_Reg = (MCUCSR_Reg & EXTI2_SenseControl_ClearingMask) | (SourceControl<<ISC2);
         break;
     default:
         return;
         break;
     }
+    EXTI_Enable(EXTI_Number);
     if (!GET_BIT(SREG_Reg,Interrupt_Pin))
     {
             GIE_Enable();
