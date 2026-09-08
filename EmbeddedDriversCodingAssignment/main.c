@@ -3,8 +3,8 @@
 #include "MCAL/DIO/DIO_Private.h"
 #include "HAL/LCD/LCD_Interface.h"
 #include "MCAL/ADC/ADC_Interface.h"
-#include "MCAL/Timer1/Timer1_Interface.h"
-#include "MCAL/Timer1/Timer1_Private.h"
+#include "MCAL/Timer0/Timer0_Interface.h"
+#include "MCAL/Timer0/Timer0_Private.h"
 #include "MCAL/GIE/GIE_Interface.h"
 #include "MCAL/EXTI/EXTI_Interface.h"
 
@@ -12,11 +12,12 @@ void TogglePin()
 {
     static volatile int count = 0;
 
-    if ((count++) % 2)
+    if (((count++)+1) % 2)
     {
-        DIO_voidSetPinValue(DIO_PORTB, DIO_PIN1, DIO_LOW);
         DIO_voidSetPinValue(DIO_PORTB, DIO_PIN0, DIO_HIGH);
-    }else
+        DIO_voidSetPinValue(DIO_PORTB, DIO_PIN1, DIO_LOW);
+    }
+    else
     {
         DIO_voidSetPinValue(DIO_PORTB, DIO_PIN0, DIO_LOW);
         DIO_voidSetPinValue(DIO_PORTB, DIO_PIN1, DIO_HIGH);
@@ -25,18 +26,23 @@ void TogglePin()
 
 int main(void)
 {
-
+    GIE_Enable();
     DIO_voidSetPinDirection(DIO_PORTB, DIO_PIN0, DIO_OUTPUT);
     DIO_voidSetPinDirection(DIO_PORTB, DIO_PIN1, DIO_OUTPUT);
     DIO_voidSetPinValue(DIO_PORTB, DIO_PIN0, DIO_LOW);
     DIO_voidSetPinValue(DIO_PORTB, DIO_PIN1, DIO_HIGH);
 
-    EXTI_voidSetCallBackFunction(EXTI_0, TogglePin);
-    EXTI_voidInit(EXTI_0, Rising_Edge1_0);
-    DIO_voidSetPinValue(EXTI0_DIO_Port, EXTI0_DIO_Pin, DIO_HIGH);
+    mTIMER0_Init();
 
     while (1)
     {
+        TogglePin();
+        mTIMER0_Delay_ms(5000);
+        TogglePin();
+        mTIMER0_Delay_ms(3000);
+        DIO_voidSetPinValue(DIO_PORTB, DIO_PIN0, DIO_LOW);
+        DIO_voidSetPinValue(DIO_PORTB, DIO_PIN1, DIO_LOW);
+        mTIMER0_Delay_ms(5000);
     }
 
     return 0;
