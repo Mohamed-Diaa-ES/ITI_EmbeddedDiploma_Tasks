@@ -5,7 +5,7 @@
 #include "Timer0_Config.h"
 
 static WaveForm_Modes_t Timer0_CurrentMode = Normal_Mode;
-static Prescaller_t Timer0_CurrentPrescaler = No_Clock_Source;
+static Prescaller_t Timer0_CurrentPrescaler = No_Clock_Source_T0;
 
 /* Single shared 1 ms timebase counter */
 static volatile u32 s_timer0_ticks = 0;

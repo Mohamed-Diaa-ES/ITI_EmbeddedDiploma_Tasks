@@ -1,31 +1,15 @@
-/**
- * @file    Timer_Config.h
- * @brief   This shows the configurable macros that we can configure for the Timer Driver
- * @author  mohammed diaa <mohammeddiaato@gmail.com>
- */
-#ifndef _Timer_Config_H
-#define _Timer_Config_H
+#ifndef _Timer1_Config_H
+#define _Timer1_Config_H
 
 #define CPU_F 8000000UL
-#define PrescallerValue Prescaller_8
-#define DefaultMode Normal_Mode
-#define PortAction Normal_PORT
 
-#define Timer0_OverflowTime 1
-
-#define OCRA 1
-#define OCRB 0
-
-#define True_Setting 1
+#define True_Setting  1
 #define False_Setting 0
 
-#define CLock_TIME (PrescallerValue / CPU_F) //->should be 1us for clock
-#define OVERFLOW_TIME (0xFFFF * CLock_TIME)
-#define one_MilliSecond (1000 * CLock_TIME)
-
-#define Preloaded_Value_For_1ms (0xFFFF - 1000)
-#define NumberOfCountsFor_OneSecond_float ((1000.0 * one_MilliSecond) / 0xFFFF)
-#define NumberOfCountsFor_OneSecond_in ((1000 * one_MilliSecond) / 0xFFFF)
-#define Preloaded_Value_For_oneSeoncd (0xFFFF - 1000)
+/* Servo PWM Configuration (50Hz / 20ms) */
+#define TIMER1_ICR1_20MS_TOP        19999U 
+#define TIMER1_SERVO_0_DEG_TICKS    500U   // 0.5 ms pulse
+#define TIMER1_SERVO_180_DEG_TICKS  2500U  // 2.5 ms pulse
+#define TIMER1_SERVO_10_DEG_STEP    111U   // (2500-500)/18
 
 #endif

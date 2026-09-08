@@ -7,14 +7,14 @@
 /* Direct mapping to CS02:0 bits in TCCR0 */
 typedef enum
 {
-    No_Clock_Source = 0,
-    Prescaller_1    = 1,
-    Prescaller_8    = 2,
-    Prescaller_64   = 3,
-    Prescaller_256  = 4,
-    Prescaller_1024 = 5,
-    ExternalSource_FallingEdge = 6,
-    ExternalSource_RisingEdge  = 7
+    No_Clock_Source_T0 = 0,
+    Prescaller_1_T0    = 1,
+    Prescaller_8_T0    = 2,
+    Prescaller_64_T0   = 3,
+    Prescaller_256_T0  = 4,
+    Prescaller_1024_T0 = 5,
+    ExternalSource_FallingEdge_T0 = 6,
+    ExternalSource_RisingEdge_T0  = 7
 } Prescaller_t;
 
 typedef enum

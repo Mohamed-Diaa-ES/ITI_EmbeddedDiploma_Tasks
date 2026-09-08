@@ -45,14 +45,7 @@ typedef enum
     ICF1,
 } TIFR_Timer1_Bits_t;
 
-typedef enum
-{
-    Normal_Mode = 0,
-    PWM_PhaseCorrect_ICR1 = 10,
-    CTC_ICR1 = 12,
-    PWM_FastPWM = 14,
 
-} WaveForm_Modes_t;
 typedef enum
 {
     Normal_PORT,
@@ -71,18 +64,7 @@ typedef enum
 
 } COM_FAST_PWM_Actions_t;
 
-typedef enum
-{
-    No_Clock_Source,
-    Prescaller_1,
-    Prescaller_8,
-    Prescaller_64,
-    Prescaller_256,
-    Prescaller_1024,
-    ExternalSource_FallingEdge,
-    ExternalSource_RisingEdge,
 
-} PrescallerValues_t;
 
 #define TCNT1_Reg *((volatile u16 *)0x4C)
 #define OCR1A_Reg *((volatile u16 *)0x4A)
