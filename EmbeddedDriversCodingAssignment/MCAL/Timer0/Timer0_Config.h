@@ -18,4 +18,6 @@
 #define TIMER0_TCNT0_1MS_PRELOAD_8MHZ_64   (256U - 125U) // 131
 #define TIMER0_OCR0_1MS_COMPARE_8MHZ_64    (124U)
 
+#define CompareMatchInterrupt_Enabled   1
+#define OverFlowInterrupt_Enabled   1
 #endif

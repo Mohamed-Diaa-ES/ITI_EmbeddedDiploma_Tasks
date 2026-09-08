@@ -4,11 +4,11 @@
 #include "Timer0_Private.h"
 #include "Timer0_Config.h"
 
-static volatile u32 OVerFlowCounting = 0;
-static volatile u32 CTC_Counting = 0;
-
 static WaveForm_Modes_t Timer0_CurrentMode = Normal_Mode;
 static Prescaller_t Timer0_CurrentPrescaler = No_Clock_Source;
+
+/* Single shared 1 ms timebase counter */
+static volatile u32 s_timer0_ticks = 0;
 
 static void (*Timer0_CallBack_OVF)(void) = NULL;
 static void (*Timer0_CallBack_CTC)(void) = NULL;
@@ -18,7 +18,6 @@ void Timer0_voidInit(WaveForm_Modes_t mode, Prescaller_t Prescaller)
     Timer0_CurrentMode = mode;
     Timer0_CurrentPrescaler = Prescaller;
 
-    // Reset TCCR0
     TCCR0_Reg = 0x00;
 
     switch (mode)
@@ -26,67 +25,66 @@ void Timer0_voidInit(WaveForm_Modes_t mode, Prescaller_t Prescaller)
     case Normal_Mode:
         CLR_BIT(TCCR0_Reg, WGM00_Bit);
         CLR_BIT(TCCR0_Reg, WGM01_Bit);
+        TCNT0_Reg = TIMER0_TCNT0_1MS_PRELOAD_8MHZ_64;
+        SET_BIT(TIMSK_Reg, TOIE0_Bit); // Enable OVF interrupt
         break;
+
+    case CTC_Mode:
+        CLR_BIT(TCCR0_Reg, WGM00_Bit);
+        SET_BIT(TCCR0_Reg, WGM01_Bit);
+        OCR0_Reg = TIMER0_OCR0_1MS_COMPARE_8MHZ_64;
+        TCNT0_Reg = 0U;
+        SET_BIT(TIMSK_Reg, OCIE0_Bit); // Enable CTC interrupt
+        break;
+
     case PWM_PhaseCorrect_Mode:
         SET_BIT(TCCR0_Reg, WGM00_Bit);
         CLR_BIT(TCCR0_Reg, WGM01_Bit);
         break;
-    case CTC_Mode:
-        CLR_BIT(TCCR0_Reg, WGM00_Bit);
-        SET_BIT(TCCR0_Reg, WGM01_Bit);
-        break;
+
     case PWM_FastPWM:
         SET_BIT(TCCR0_Reg, WGM00_Bit);
         SET_BIT(TCCR0_Reg, WGM01_Bit);
         break;
     }
 
-    // Set clock source directly using enum bit value
+    // Set prescaler clock bits
     TCCR0_Reg = (TCCR0_Reg & Prescaller_ClearingMask) | (Prescaller & Prescaller_SetMask);
 }
 
 u8 Timer0_u8_my_delay_ms_OVF(u16 ms)
 {
+    u32 start_time;
+
     if (ms == 0U || Timer0_CurrentMode != Normal_Mode)
     {
         return Fail;
     }
 
-    OVerFlowCounting = ms;
-
-    TCNT0_Reg = TIMER0_TCNT0_1MS_PRELOAD_8MHZ_64;
-
-    SET_BIT(TIFR_Reg, TOV0_Bit);
-    SET_BIT(TIMSK_Reg, TOIE0_Bit);
-
-    while (OVerFlowCounting != 0UL)
+    start_time = s_timer0_ticks;
+    while ((s_timer0_ticks - start_time) < (u32)ms)
     {
+        // Pure interrupt tracking, no extra global variables
     }
 
-    CLR_BIT(TIMSK_Reg, TOIE0_Bit);
     return Success;
 }
 
 u8 Timer0_u8_my_delay_ms_CTC(u16 ms)
 {
+    u32 start_time;
+
     if (ms == 0U || Timer0_CurrentMode != CTC_Mode)
     {
         return Fail;
     }
 
-    CTC_Counting = ms;
-
-    OCR0_Reg = TIMER0_OCR0_1MS_COMPARE_8MHZ_64;
-    TCNT0_Reg = 0U;
-
-    SET_BIT(TIFR_Reg, OCF0_Bit);
-    SET_BIT(TIMSK_Reg, OCIE0_Bit);
-
-    while (CTC_Counting != 0UL)
+    start_time = s_timer0_ticks;
+    while ((s_timer0_ticks - start_time) < (u32)ms)
     {
+        // Pure interrupt tracking, no extra global variables
     }
 
-    CLR_BIT(TIMSK_Reg, OCIE0_Bit);
     return Success;
 }
 
@@ -119,10 +117,7 @@ void Timer0_voidDisableTimer(void)
 void __vector_10(void) __attribute__((signal));
 void __vector_10(void)
 {
-    if (CTC_Counting > 0UL)
-    {
-        CTC_Counting--;
-    }
+    s_timer0_ticks++;
 
     if (Timer0_CallBack_CTC != NULL)
     {
@@ -134,13 +129,10 @@ void __vector_10(void)
 void __vector_11(void) __attribute__((signal));
 void __vector_11(void)
 {
-    // Reload preload for the next 1ms cycle
+    // Reload register for the next 1 ms tick
     TCNT0_Reg = TIMER0_TCNT0_1MS_PRELOAD_8MHZ_64;
 
-    if (OVerFlowCounting > 0UL)
-    {
-        OVerFlowCounting--;
-    }
+    s_timer0_ticks++;
 
     if (Timer0_CallBack_OVF != NULL)
     {
