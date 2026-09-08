@@ -8,7 +8,7 @@ static volatile u32 OVerFlowCounting = 0;
 static volatile u32 CTC_Counting = 0;
 
 static WaveForm_Modes_t Timer0_CurrentMode = Normal_Mode;
-static Prescaller_t     Timer0_CurrentPrescaler = No_Clock_Source;
+static Prescaller_t Timer0_CurrentPrescaler = No_Clock_Source;
 
 static void (*Timer0_CallBack_OVF)(void) = NULL;
 static void (*Timer0_CallBack_CTC)(void) = NULL;
@@ -52,19 +52,15 @@ u8 Timer0_u8_my_delay_ms_OVF(u16 ms)
         return Fail;
     }
 
-    // Initialize 1ms tick countdown
     OVerFlowCounting = ms;
 
-    // Preload TCNT0 for deterministic 1ms tick
     TCNT0_Reg = TIMER0_TCNT0_1MS_PRELOAD_8MHZ_64;
 
-    // Clear any pending OVF flag by writing 1, then enable OVF interrupt
     SET_BIT(TIFR_Reg, TOV0_Bit);
     SET_BIT(TIMSK_Reg, TOIE0_Bit);
 
     while (OVerFlowCounting != 0UL)
     {
-        // Wait for ISR to decrement count
     }
 
     CLR_BIT(TIMSK_Reg, TOIE0_Bit);
@@ -78,20 +74,16 @@ u8 Timer0_u8_my_delay_ms_CTC(u16 ms)
         return Fail;
     }
 
-    // Initialize 1ms tick countdown
     CTC_Counting = ms;
 
-    // Set OCR0 for 1ms intervals
     OCR0_Reg = TIMER0_OCR0_1MS_COMPARE_8MHZ_64;
     TCNT0_Reg = 0U;
 
-    // Clear pending flag by writing 1, then enable CTC interrupt
     SET_BIT(TIFR_Reg, OCF0_Bit);
     SET_BIT(TIMSK_Reg, OCIE0_Bit);
 
     while (CTC_Counting != 0UL)
     {
-        // Wait for ISR to decrement count
     }
 
     CLR_BIT(TIMSK_Reg, OCIE0_Bit);

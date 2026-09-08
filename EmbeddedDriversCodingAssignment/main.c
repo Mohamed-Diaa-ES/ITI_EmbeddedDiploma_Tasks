@@ -1,48 +1,54 @@
-#include <util/delay.h>
 #include "MCAL/DIO/DIO_Interface.h"
-#include "MCAL/DIO/DIO_Private.h"
-#include "HAL/LCD/LCD_Interface.h"
-#include "MCAL/ADC/ADC_Interface.h"
 #include "MCAL/Timer0/Timer0_Interface.h"
-#include "MCAL/Timer0/Timer0_Private.h"
 #include "MCAL/GIE/GIE_Interface.h"
-#include "MCAL/EXTI/EXTI_Interface.h"
 
-void TogglePin()
+static void Motor_CW(void)
 {
-    static volatile int count = 0;
+    DIO_voidSetPinValue(DIO_PORTB, DIO_PIN0, DIO_HIGH);
+    DIO_voidSetPinValue(DIO_PORTB, DIO_PIN1, DIO_LOW);
+}
 
-    if (((count++)+1) % 2)
-    {
-        DIO_voidSetPinValue(DIO_PORTB, DIO_PIN0, DIO_HIGH);
-        DIO_voidSetPinValue(DIO_PORTB, DIO_PIN1, DIO_LOW);
-    }
-    else
-    {
-        DIO_voidSetPinValue(DIO_PORTB, DIO_PIN0, DIO_LOW);
-        DIO_voidSetPinValue(DIO_PORTB, DIO_PIN1, DIO_HIGH);
-    }
+static void Motor_CCW(void)
+{
+    DIO_voidSetPinValue(DIO_PORTB, DIO_PIN0, DIO_LOW);
+    DIO_voidSetPinValue(DIO_PORTB, DIO_PIN1, DIO_HIGH);
+}
+
+static void Motor_Stop(void)
+{
+    DIO_voidSetPinValue(DIO_PORTB, DIO_PIN0, DIO_LOW);
+    DIO_voidSetPinValue(DIO_PORTB, DIO_PIN1, DIO_LOW);
 }
 
 int main(void)
 {
-    GIE_Enable();
     DIO_voidSetPinDirection(DIO_PORTB, DIO_PIN0, DIO_OUTPUT);
     DIO_voidSetPinDirection(DIO_PORTB, DIO_PIN1, DIO_OUTPUT);
-    DIO_voidSetPinValue(DIO_PORTB, DIO_PIN0, DIO_LOW);
-    DIO_voidSetPinValue(DIO_PORTB, DIO_PIN1, DIO_HIGH);
+    Motor_Stop();
 
-    mTIMER0_Init();
+    // Enable Global Interrupts
+    GIE_Enable();
+
+    // --- Phase 1: Normal / OVF Mode ---
+    Timer0_voidInit(Normal_Mode, Prescaller_64);
+    Motor_CW();
+    Timer0_u8_my_delay_ms_OVF(5000);
+    Motor_CCW();
+    Timer0_u8_my_delay_ms_OVF(3000);
+    Motor_Stop();
+    Timer0_u8_my_delay_ms_OVF(5000);
+
+    // --- Phase 2: CTC Mode ---
+    Timer0_voidInit(CTC_Mode, Prescaller_64);
+    Motor_CW();
+    Timer0_u8_my_delay_ms_CTC(5000);
+    Motor_CCW();
+    Timer0_u8_my_delay_ms_CTC(3000);
+    Motor_Stop();
+    Timer0_u8_my_delay_ms_CTC(5000);
 
     while (1)
     {
-        TogglePin();
-        mTIMER0_Delay_ms(5000);
-        TogglePin();
-        mTIMER0_Delay_ms(3000);
-        DIO_voidSetPinValue(DIO_PORTB, DIO_PIN0, DIO_LOW);
-        DIO_voidSetPinValue(DIO_PORTB, DIO_PIN1, DIO_LOW);
-        mTIMER0_Delay_ms(5000);
     }
 
     return 0;
