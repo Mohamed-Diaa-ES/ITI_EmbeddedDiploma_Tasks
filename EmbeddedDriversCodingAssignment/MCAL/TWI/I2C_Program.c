@@ -1,183 +1,94 @@
-/**
- * @file     I2C_Program.c
- * @brief    Bare-metal I2C Implementation for ATmega32.
- */
-
 #include "I2C_Interface.h"
 #include "I2C_Config.h"
 #include "I2C_Private.h"
 
-/* Helper function to poll TWINT flag with a timeout */
-static I2C_ErrorStatus_t I2C_WaitFlag(void)
+/* State Machine Variables */
+static volatile I2C_State_t g_i2c_state = I2C_STATE_IDLE;
+static uint8_t *g_twi_tx_buffer = NULL;
+static uint16_t g_twi_tx_length = 0;
+static uint16_t g_twi_tx_index = 0;
+static uint8_t g_twi_target_address = 0;
+static void (*g_twi_callback)(I2C_ErrorStatus_t) = NULL;
+
+/* Asynchronous Transmit Function */
+I2C_ErrorStatus_t I2C_MasterTransmitAsync(uint8_t slave_address, uint8_t *data, uint16_t length, void (*callback)(I2C_ErrorStatus_t))
 {
-    uint32_t timeout = I2C_TIMEOUT_LOOPS;
-    while (!(TWCR_Reg & (1 << TWINT_Bit)))
+    if (g_i2c_state != I2C_STATE_IDLE)
     {
-        if (--timeout == 0)
-        {
-            TWCR_Reg = (1 << TWEN_Bit); 
-            return I2C_TIMEOUT_ERROR;
-        }
+        return I2C_START_ERROR; // Bus is busy
     }
+
+    /* 1. Setup the background transfer details */
+    g_twi_target_address = slave_address;
+    g_twi_tx_buffer = data;
+    g_twi_tx_length = length;
+    g_twi_tx_index = 0;
+    g_twi_callback = callback;
+    g_i2c_state = I2C_STATE_START_SENT;
+
+    /* 2. Fire the START condition with Interrupt Enabled */
+    TWCR_Reg = (1 << TWINT_Bit) | (1 << TWSTA_Bit) | (1 << TWEN_Bit) | (1 << TWIE_Bit);
+
+    /* 3. Return immediately! CPU is free to do other tasks. */
     return I2C_OK;
 }
 
-void I2C_InitMaster(uint8_t own_address)
+void __vector_19(void) __attribute__((signal, used));
+void __vector_19(void)
 {
-    if (own_address >= Reserved_Addresses_Scheme || own_address == General_Call_InstructionAddress)
+    uint8_t status = StatusBitsValue; // Read masked TWSR register[cite: 20, 21]
+
+    switch (status)
     {
-        return;
+    /* START condition successfully transmitted */
+    case START_ERROR_CodeCheck:
+        TWDR_Reg = (g_twi_target_address << 1) | Write_Command;          // Load SLA+W[cite: 20, 21]
+        TWCR_Reg = (1 << TWINT_Bit) | (1 << TWEN_Bit) | (1 << TWIE_Bit); // Clear flag to send[cite: 21]
+        g_i2c_state = I2C_STATE_SLA_W_SENT;
+        break;
+
+    /* SLA+W transmitted, ACK received */
+    case Slave_Write_Operation_Ack_Recieving_CodeCheck:
+    /* Data byte transmitted, ACK received */
+    case SendingData_Ack_Recieving_CodeCheck:
+
+        if (g_twi_tx_index < g_twi_tx_length)
+        {
+            // More data to send
+            TWDR_Reg = g_twi_tx_buffer[g_twi_tx_index++];                    // Load next byte[cite: 20]
+            TWCR_Reg = (1 << TWINT_Bit) | (1 << TWEN_Bit) | (1 << TWIE_Bit); // Send it[cite: 21]
+            g_i2c_state = I2C_STATE_TX_DATA;
+        }
+        else
+        {
+            // All data sent. Fire STOP condition.
+            TWCR_Reg = (1 << TWINT_Bit) | (1 << TWSTO_Bit) | (1 << TWEN_Bit); // STOP bit set[cite: 21]
+            g_i2c_state = I2C_STATE_IDLE;
+
+            if (g_twi_callback != NULL)
+            {
+                g_twi_callback(I2C_OK); // Notify application it finished successfully
+            }
+        }
+        break;
+
+    /* NACK received or Arbitration Lost (Error Handling) */
+    case Slave_Write_Operation_NotAck_Recieving_CodeCheck:
+    case SendingData_NotAck_Recieving_CodeCheck:
+    case ARBITRATION_LOST_CodeCheck:
+        TWCR_Reg = (1 << TWINT_Bit) | (1 << TWSTO_Bit) | (1 << TWEN_Bit); // Abort with STOP[cite: 21]
+        g_i2c_state = I2C_STATE_IDLE;
+
+        if (g_twi_callback != NULL)
+        {
+            g_twi_callback(I2C_DATA_TX_NACK_REC); // Notify application of error
+        }
+        break;
+
+    default:
+        // Unhandled state, reset peripheral
+        TWCR_Reg = (1 << TWINT_Bit) | (1 << TWEN_Bit);
+        g_i2c_state = I2C_STATE_IDLE;
+        break;
     }
-
-    SetBit(TWCR_Reg, TWEN_Bit);
-    Clearing_PrescallerBits();
-    TWSR_Reg |= TWI_PrescallerRepresentation;
-
-    TWBR_Reg = Calculate_Value_TWI_Bit_Rate(F_CPU, SCL_Frequency, TWI_PrescallerValue);
-    TWAR_Reg = (own_address << 1) | (GeneralCall_Enabling);
-}
-
-I2C_ErrorStatus_t I2C_StartCondition(void)
-{
-    TWCR_Reg = (1 << TWINT_Bit) | (1 << TWSTA_Bit) | (1 << TWEN_Bit);
-
-    if (I2C_WaitFlag() == I2C_TIMEOUT_ERROR) return I2C_TIMEOUT_ERROR;
-
-    if (StatusBitsValue == START_ERROR_CodeCheck)
-    {
-        return I2C_OK;
-    }
-    return I2C_START_ERROR;
-}
-
-I2C_ErrorStatus_t I2C_RepeatedStart(void)
-{
-    TWCR_Reg = (1 << TWINT_Bit) | (1 << TWSTA_Bit) | (1 << TWEN_Bit);
-
-    if (I2C_WaitFlag() == I2C_TIMEOUT_ERROR) return I2C_TIMEOUT_ERROR;
-
-    if (StatusBitsValue == REP_START_ERROR_CodeCheck)
-    {
-        return I2C_OK;
-    }
-    return I2C_REP_START_ERROR;
-}
-
-void I2C_StopCondition(void)
-{
-    TWCR_Reg = (1 << TWINT_Bit) | (1 << TWSTO_Bit) | (1 << TWEN_Bit);
-}
-
-I2C_ErrorStatus_t I2C_SendSlaveAddressWrite(uint8_t slave_address)
-{
-    if (slave_address >= Reserved_Addresses_Scheme)
-    {
-        return I2C_INVALID_ADDRESS;
-    }
-
-    TWDR_Reg = (slave_address << 1) | Write_Command;
-    TWCR_Reg = (1 << TWINT_Bit) | (1 << TWEN_Bit);
-
-    if (I2C_WaitFlag() == I2C_TIMEOUT_ERROR) return I2C_TIMEOUT_ERROR;
-
-    if (StatusBitsValue == Slave_Write_Operation_Ack_Recieving_CodeCheck)
-    {
-        return I2C_SLA_W_ACK_REC;
-    }
-    else if (StatusBitsValue == Slave_Write_Operation_NotAck_Recieving_CodeCheck)
-    {
-        return I2C_SLA_W_NACK_REC;
-    }
-    else if (StatusBitsValue == ARBITRATION_LOST_CodeCheck)
-    {
-        return I2C_ARBITRATION_LOST;
-    }
-    return I2C_SLA_W_ERROR;
-}
-
-I2C_ErrorStatus_t I2C_SendSlaveAddressRead(uint8_t slave_address)
-{
-    if (slave_address >= Reserved_Addresses_Scheme)
-    {
-        return I2C_INVALID_ADDRESS;
-    }
-
-    TWDR_Reg = (slave_address << 1) | Read_Command;
-    TWCR_Reg = (1 << TWINT_Bit) | (1 << TWEN_Bit);
-
-    if (I2C_WaitFlag() == I2C_TIMEOUT_ERROR) return I2C_TIMEOUT_ERROR;
-
-    if (StatusBitsValue == Slave_Read_ACK_Recieving_CodeCheck)
-    {
-        return I2C_SLA_R_ACK_REC;
-    }
-    else if (StatusBitsValue == Slave_Read_NotACK_Recieving_CodeCheck)
-    {
-        return I2C_SLA_R_NACK_REC;
-    }
-    else if (StatusBitsValue == ARBITRATION_LOST_CodeCheck)
-    {
-        return I2C_ARBITRATION_LOST;
-    }
-    return I2C_SLA_R_ERROR;
-}
-
-I2C_ErrorStatus_t I2C_WriteByte(uint8_t data)
-{
-    TWDR_Reg = data;
-    TWCR_Reg = (1 << TWINT_Bit) | (1 << TWEN_Bit);
-
-    if (I2C_WaitFlag() == I2C_TIMEOUT_ERROR) return I2C_TIMEOUT_ERROR;
-
-    if (StatusBitsValue == SendingData_Ack_Recieving_CodeCheck)
-    {
-        return I2C_DATA_TX_ACK_REC;
-    }
-    else if (StatusBitsValue == SendingData_NotAck_Recieving_CodeCheck)
-    {
-        return I2C_DATA_TX_NACK_REC;
-    }
-    else if (StatusBitsValue == ARBITRATION_LOST_CodeCheck)
-    {
-        return I2C_ARBITRATION_LOST;
-    }
-    return I2C_DATA_TX_ERROR;
-}
-
-I2C_ErrorStatus_t I2C_ReadByteAck(uint8_t *data)
-{
-    if (data == NULL)
-    {
-        return I2C_NULL_POINTER_ERROR;
-    }
-
-    TWCR_Reg = (1 << TWINT_Bit) | (1 << TWEA_Bit) | (1 << TWEN_Bit);
-
-    if (I2C_WaitFlag() == I2C_TIMEOUT_ERROR) return I2C_TIMEOUT_ERROR;
-
-    if (StatusBitsValue == Data_byte_has_been_received_ACK)
-    {
-        *data = TWDR_Reg;
-        return I2C_DATA_RX_ACK_SENT;
-    }
-    return I2C_DATA_RX_ERROR;
-}
-
-I2C_ErrorStatus_t I2C_ReadByteNack(uint8_t *data)
-{
-    if (data == NULL)
-    {
-        return I2C_NULL_POINTER_ERROR;
-    }
-
-    TWCR_Reg = (1 << TWINT_Bit) | (1 << TWEN_Bit);
-    
-    if (I2C_WaitFlag() == I2C_TIMEOUT_ERROR) return I2C_TIMEOUT_ERROR;
-
-    if (StatusBitsValue == Data_byte_has_been_received_NACK)
-    {
-        *data = TWDR_Reg;
-        return I2C_DATA_RX_NACK_SENT;
-    }
-    return I2C_DATA_RX_ERROR;
 }

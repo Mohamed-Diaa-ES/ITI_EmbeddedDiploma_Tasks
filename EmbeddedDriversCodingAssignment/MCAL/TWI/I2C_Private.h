@@ -16,7 +16,7 @@ typedef enum
     TWSTO_Bit,
     TWSTA_Bit,
     TWEA_Bit,
-    TWINT_Bit, 
+    TWINT_Bit,
 
 } TWCR_Bits_t;
 
@@ -50,11 +50,11 @@ typedef enum
 
 } TWIBitRatePrescalerRepresention_t;
 
-#define TWGCE_Bit 0 
+#define TWGCE_Bit 0
 
 #define Calculate_Value_TWI_Bit_Rate(CPU_ClockFrequency, SCL_Freq, Prescaller) ((uint8_t)((((CPU_ClockFrequency) / (SCL_Freq)) - 16) / (2 * (Prescaller))))
 
-#define StatusCodeMask 0xF8 
+#define StatusCodeMask 0xF8
 
 #define START_ERROR_CodeCheck 0x08
 #define REP_START_ERROR_CodeCheck 0x10
@@ -109,4 +109,14 @@ typedef enum
  * @brief   Status register
  */
 #define SREG_Reg (*((volatile uint8_t *)0x5F))
+
+typedef enum
+{
+    I2C_STATE_IDLE,
+    I2C_STATE_START_SENT,
+    I2C_STATE_SLA_W_SENT,
+    I2C_STATE_TX_DATA,
+    I2C_STATE_ERROR
+} I2C_State_t;
+
 #endif
