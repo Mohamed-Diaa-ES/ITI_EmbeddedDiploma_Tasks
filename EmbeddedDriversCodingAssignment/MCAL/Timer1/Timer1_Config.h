@@ -8,7 +8,7 @@
 
 #define CPU_F 8000000UL
 #define PrescallerValue Prescaller_8
-#define WorkingMode Normal_Mode
+#define DefaultMode Normal_Mode
 #define PortAction Normal_PORT
 
 #define Timer0_OverflowTime 1

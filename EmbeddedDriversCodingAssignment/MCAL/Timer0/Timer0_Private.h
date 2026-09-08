@@ -5,78 +5,51 @@
  */
 #ifndef _Timer_Private_H
 #define _Timer_Private_H
-
+/**
+ * @enum TCCR0_Bits_t
+ * @brief
+ */
 typedef enum
 {
-    CS00,
-    CS01,
-    CS02,
-    WGM01,
-    COM00,
-    COM01,
-    WGM00,
-    FOC0,
+    CS00_Bit,
+    CS01_Bit,
+    CS02_Bit,
+    WGM01_Bit,
+    COM00_Bit,
+    COM01_Bit,
+    WGM00_Bit,
+    FOC0_Bit,
 } TCCR0_Bits_t;
+/**
+ * @enum TIMSK_Bits_t
+ * @brief
+ */
 typedef enum
 {
-    TOIE0,
-    OCIE0,
-    
+    TOIE0_Bit,
+    OCIE0_Bit,
+
 } TIMSK_Bits_t;
+/**
+ * @enum TIFR_Bits_t
+ * @brief
+ */
 typedef enum
 {
-    TOV0,
-    OCF0,
-    
+    TOV0_Bit,
+    OCF0_Bit,
+
 } TIFR_Bits_t;
-typedef enum
-{
-    
-    Reset_Prescaller_timer0_and_timer1=0,
-    Global_Interrupt_Pin=7,
-    
-} SomeOther_Bits_t;
 
-typedef enum
-{
-    Normal_Mode,
-    PWM_PhaseCorrect_Mode,
-    CTC_Mode,
-    PWM_FastPWM,
-    
-} WaveForm_Modes_t;
-typedef enum
-{
-    Normal_PORT_Fast_pwm,
-    Toggle_OC0,
-    Clear_OC0,
-    Set_OC0,
-    
-} COM_NoNPWM_Modes_t;
-typedef enum
-{
-    Normal_PORT,
-    RESERVED_DO_NOT_USE,
-    Non_Inverting,
-    Inverting,
-    
-} COM_FAST_PWM_Modes_t;
-typedef enum
-{
-No_Clock_Source,
-Prescaller_1,
-Prescaller_64,
-Prescaller_256,
-Prescaller_1024,
-ExternalSource_FallingEdge,
-ExternalSource_RisingEdge,
-    
-} PrescallerValues_t;
+#define Reset_Prescaller_timer0_and_timer1_SFIOR_Reg 0
 
-#define CPU_Freq    8000000
-#define Timer0_Overflow_Value 256
+#define Timer0_Overflow_Value 256UL
+#define Prescaller_ClearingMask 0xF8
+#define Prescaller_SetMask 0x07
+#define Action_ClearingMask ~0x30
+#define Action_SetMask      0x30
 
-#define SREG_Reg *((volatile u8 *)0x5F)
+
 #define TCCR0_Reg *((volatile u8 *)0x53)
 #define TCNT0_Reg *((volatile u8 *)0x52)
 #define OCR0_Reg *((volatile u8 *)0x5C)

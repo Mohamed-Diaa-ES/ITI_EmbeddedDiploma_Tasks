@@ -1,0 +1,10 @@
+{
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.hovers.currentLine.enabled": false,
+    "gitlens.hovers.currentLine.details": false,
+    "gitlens.hovers.currentLine.changes": false,
+    "gitlens.hovers.annotations.details": false,
+    "gitlens.hovers.annotations.changes": false,
+    "gitlens.currentLine.pullRequests.enabled": false,
+    "gitlens.currentLine.enabled": false
+}
