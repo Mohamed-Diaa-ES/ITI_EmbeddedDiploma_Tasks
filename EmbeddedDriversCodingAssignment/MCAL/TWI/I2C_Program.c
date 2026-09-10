@@ -6,7 +6,8 @@
 #include "I2C_Interface.h"
 #include "I2C_Config.h"
 #include "I2C_Private.h"
-
+#include "../../LIB/STD_TYPES.h"
+#include "../../LIB/BIT_MATH.h"
 /* Helper function to poll TWINT flag with a timeout */
 static I2C_ErrorStatus_t I2C_WaitFlag(void)
 {
@@ -29,7 +30,7 @@ void I2C_InitMaster(uint8_t own_address)
         return;
     }
 
-    SetBit(TWCR_Reg, TWEN_Bit);
+    SET_BIT(TWCR_Reg, TWEN_Bit);
     Clearing_PrescallerBits();
     TWSR_Reg |= TWI_PrescallerRepresentation;
 

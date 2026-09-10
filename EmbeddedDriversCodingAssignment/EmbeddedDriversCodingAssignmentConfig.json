@@ -6,7 +6,7 @@
   "target": "AVR",
   "mcu": "atmega32",
   "language": "C",
-  "languageVersion": "C99",
+  "languageVersion": "GNU99",
   "mcuFrequency": "8",
   "frequencyUnit": "MHz",
   "sourceFiles": [],
