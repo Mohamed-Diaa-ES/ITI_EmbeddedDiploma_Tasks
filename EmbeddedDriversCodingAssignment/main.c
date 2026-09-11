@@ -1,6 +1,7 @@
 // #include <stddef.h>
 #include "FreeRTOS/FreeRTOS.h"
 #include "FreeRTOS/task.h"
+#include "FreeRTOS/semphr.h"
 #include "MCAL/DIO/DIO_Interface.h"
 #include "HAL/LCD/LCD_Interface.h"
 #include "MCAL/GIE/GIE_Interface.h"
@@ -11,7 +12,7 @@
 void LCD1()
 {
     u8 StringToSend2[] = "Hello I am task1";
-
+    xSema
     while (1)
     {
         {
