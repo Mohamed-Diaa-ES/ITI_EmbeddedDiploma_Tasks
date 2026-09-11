@@ -1,50 +1,37 @@
-// #include <stddef.h>
-#include "FreeRTOS/FreeRTOS.h"
-#include "FreeRTOS/task.h"
-#include "FreeRTOS/semphr.h"
 #include "MCAL/DIO/DIO_Interface.h"
-#include "HAL/LCD/LCD_Interface.h"
+#include "MCAL/Timer1/Timer1_Interface.h"
 #include "MCAL/GIE/GIE_Interface.h"
-#include "HAL/LCD/LCD_Private.h"
-#include "MCAL/DIO/DIO_Private.h"
-#include "LIB/BIT_MATH.h"
 
-void LCD1()
-{
-    u8 StringToSend2[] = "Hello I am task1";
-    xSema
-    while (1)
-    {
-        {
-
-            LCD_voidSendString(StringToSend2);
-            vTaskDelay(100);   
-        }
-    }
-}
-void LCD2()
-{
-
-    u8 StringToSend2[] = "Hello I am task2";
-    while (1)
-    {
-        
-        LCD_voidSendString(StringToSend2);
-        vTaskDelay(100);
-    }
-}
-
-#define StackSize 400
 int main(void)
 {
-    GIE_Enable();
-    LCD_voidInit();
-    xTaskCreate(&LCD1, NULL, StackSize, NULL, 4, NULL);
-    xTaskCreate(&LCD2, NULL, StackSize, NULL, 4, NULL);
+    // OC1A is PD5 on Atmega32
+    DIO_voidSetPinDirection(DIO_PORTD, DIO_PIN5, DIO_OUTPUT);
 
-    vTaskStartScheduler();
+    Timer1_u8Init(PWM_FastPWM, Prescaller_8_T1);
+    GIE_Enable();
+
+    u16 current_angle_ticks;
 
     while (1)
-        ;
+    {
+        // Sweep UP: 0 deg to 180 deg (inclusive)
+        for (current_angle_ticks = TIMER1_SERVO_0_DEG_TICKS;
+             current_angle_ticks <= TIMER1_SERVO_180_DEG_TICKS;
+             current_angle_ticks += TIMER1_SERVO_10_DEG_STEP)
+        {
+            Timer1_u8SetCompareValue(current_angle_ticks, 1);
+            Timer1_u8_my_delay_ms(1000);
+        }
+
+        // Sweep DOWN: 170 deg down to 10 deg (prevents 2-second hold at boundaries)
+        for (current_angle_ticks = TIMER1_SERVO_180_DEG_TICKS - TIMER1_SERVO_10_DEG_STEP;
+             current_angle_ticks > TIMER1_SERVO_0_DEG_TICKS;
+             current_angle_ticks -= TIMER1_SERVO_10_DEG_STEP)
+        {
+            Timer1_u8SetCompareValue(current_angle_ticks, 1);
+            Timer1_u8_my_delay_ms(1000);
+        }
+    }
+
     return 0;
 }
